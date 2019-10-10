@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "275496594096",
+    "firebase_url": "https://appubicatexfinal-2b38a.firebaseio.com",
+    "project_id": "appubicatexfinal-2b38a",
+    "storage_bucket": "appubicatexfinal-2b38a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275496594096:android:99fe54bf71210143a76975",
+        "android_client_info": {
+          "package_name": "com.example.appubicatexfinal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "275496594096-qiq5u5dlrqb2vjr2hmtnntdl22rqe28i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.appubicatexfinal",
+            "certificate_hash": "58ac6285bb7b7c4b3ae19f246280c2634044a04c"
+          }
+        },
+        {
+          "client_id": "275496594096-850p6ir7m58ma0crmsj6h0osmi9r9s9m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLPb8l7dekT54EeADMxwjEuPj5BjAJSek"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "275496594096-850p6ir7m58ma0crmsj6h0osmi9r9s9m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

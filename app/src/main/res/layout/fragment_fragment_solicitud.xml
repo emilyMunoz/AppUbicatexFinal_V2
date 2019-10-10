@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentSolicitud">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/toolbar"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="solicitud de ubicacion "
+            android:textSize="20sp"
+            android:paddingTop="40dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Seleccionar ubicacion:"
+            android:textStyle="bold"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Abrir mapa"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Seleccionar categoria:"
+            android:textStyle="bold"/>
+
+        <RadioButton
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Comercios"/>
+
+        <RadioButton
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Centros Turisticos"/>
+
+        <RadioButton
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Paradas"/>
+
+        <RadioButton
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Otros"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/descripcion"
+            android:inputType="textPassword"
+            android:layout_marginTop="20dp"
+            android:hint="Descripción" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/nombrePropietario"
+            android:inputType="textPassword"
+            android:layout_marginTop="20dp"
+            android:hint="Nombre propietario"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/telefono"
+            android:inputType="text|phone"
+            android:layout_marginTop="20dp"
+            android:hint="Teléfono" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enviar"
+            android:id="@+id/btn_registrar"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="20dp"
+            android:textColor="#fff"/>
+    </LinearLayout>
+
+</FrameLayout>
