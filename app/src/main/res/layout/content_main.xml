@@ -9,6 +9,9 @@
     android:id="@+id/contenedor"
     tools:showIn="@layout/app_bar_main">
 
-
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </android.support.constraint.ConstraintLayout>
