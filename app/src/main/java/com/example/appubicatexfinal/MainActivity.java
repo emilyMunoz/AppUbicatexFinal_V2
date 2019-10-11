@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Debes iniciar sesion o registrarse", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
