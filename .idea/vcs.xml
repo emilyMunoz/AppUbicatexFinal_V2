@@ -4,4 +4,7 @@
     <mapping directory="" vcs="Git" />
   </component>
   <!-- -->
+=======
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+  </component>
 </project>
