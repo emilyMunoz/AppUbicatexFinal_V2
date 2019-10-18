@@ -47,10 +47,12 @@ public class RegistrarseActivity extends AppCompatActivity implements View.OnCli
         String password = textPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)){
+            validacion();
             Toast.makeText(this,"Se debe ingresa un correo electrónico!",Toast.LENGTH_LONG).show();
             return;
         }
         if(TextUtils.isEmpty(password)){
+            validacion();
             Toast.makeText(this,"Falta ingresar la contraseña!",Toast.LENGTH_LONG).show();
             return;
         }
@@ -73,13 +75,32 @@ public class RegistrarseActivity extends AppCompatActivity implements View.OnCli
                     if (task.getException()instanceof FirebaseAuthUserCollisionException){//si existe un correo igual
 
                     Toast.makeText(RegistrarseActivity.this, "El usuario ya existe!", Toast.LENGTH_SHORT).show();
+                    limpiar();
                 }else {
                         Toast.makeText(RegistrarseActivity.this, "Error la contraseña debe de ser de mas de tres caracteres", Toast.LENGTH_LONG).show();
+                        limpiar();
                     }
                 }
                 progressDialog.dismiss();
             }
         });
+    }
+    private void validacion(){
+
+        String correos = textEmail.getText().toString();
+        String password = textPassword.getText().toString();
+
+        if (correos.equals("")){
+            textEmail.setError("Requerido");
+
+        } else if (password.equals("")){
+            textPassword.setError("Requerido");
+        }
+
+    }
+    private void limpiar(){
+        textEmail.setText("");
+        textPassword.setText("");
     }
 
     @Override

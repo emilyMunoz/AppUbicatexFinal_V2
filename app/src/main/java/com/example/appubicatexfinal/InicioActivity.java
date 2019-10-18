@@ -55,10 +55,12 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         String password = textPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)){
+            validacion();
             Toast.makeText(this,"Se debe ingresa un correo electrónico!",Toast.LENGTH_LONG).show();
             return;
         }
         if(TextUtils.isEmpty(password)){
+            validacion();
             Toast.makeText(this,"Falta ingresar la contraseña!",Toast.LENGTH_LONG).show();
             return;
         }
@@ -81,8 +83,10 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
                     if (task.getException()instanceof FirebaseAuthUserCollisionException){//si existe un correo igual
 
                         Toast.makeText(InicioActivity.this, "El usuario ya existe!", Toast.LENGTH_SHORT).show();
+                        limpiar();
                     }else {
                         Toast.makeText(InicioActivity.this, "Error en el correo o contraseña", Toast.LENGTH_LONG).show();
+                        limpiar();
                     }
                 }
                 progressDialog.dismiss();
@@ -91,6 +95,23 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    private void validacion(){
+
+        String correos = textEmail.getText().toString();
+        String password = textPassword.getText().toString();
+
+        if (correos.equals("")){
+            textEmail.setError("Requerido");
+
+        } else if (password.equals("")){
+            textPassword.setError("Requerido");
+        }
+
+    }
+    private void limpiar(){
+        textEmail.setText("");
+        textPassword.setText("");
+    }
 
     @Override
     public void onClick(View v) {

@@ -21,6 +21,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -50,6 +52,9 @@ public class MainActivity extends AppCompatActivity
 
                     }
                 });
+                mapboxMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(9.935697, -84.1483647))
+                        .title("Costa Rica"));
             }
         });
 
@@ -150,7 +155,9 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentHome()).commit();
 
         } else if (id == R.id.nav_comercio) {
-            fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentComerciales()).commit();
+            //fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentComerciales()).commit();
+            Intent intent = new Intent(MainActivity.this,comercios.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_turismo) {
             fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentTurismo()).commit();
