@@ -77,7 +77,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(InicioActivity.this,"Bienvenido " + textEmail.getText(),Toast.LENGTH_LONG).show();
 
                     Intent inten = new Intent(InicioActivity.this,MainActivity.class);
-                    //inten.putExtra(MainActivity.user, email);
+                    inten.putExtra("usuario", textEmail.getText().toString());
                     startActivity(inten);
                 }else {
                     if (task.getException()instanceof FirebaseAuthUserCollisionException){//si existe un correo igual

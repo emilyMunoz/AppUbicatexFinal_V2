@@ -19,6 +19,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
      //public static final String user = "names";
-     //TextView txtUser;
+     private TextView lblUser;
 
     private MapView mapView;
     @Override
@@ -53,8 +54,9 @@ public class MainActivity extends AppCompatActivity
                     }
                 });
                 mapboxMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(9.935697, -84.1483647))
-                        .title("Costa Rica"));
+                        .position(new LatLng(10.6179738, -85.4501944))
+                        .title("Universidad Nacional Campus Liberia")
+                        .snippet("La U mas cool"));
             }
         });
 
@@ -63,14 +65,14 @@ public class MainActivity extends AppCompatActivity
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         NavigationView navigationView = findViewById(R.id.nav_view);
-       // txtUser = navigationView.getHeaderView(0).findViewById(R.id.txtUser);
+       lblUser = navigationView.getHeaderView(0).findViewById(R.id.lblUser);
 
        //if(false){
        //     user = getIntent().getExtras().getString("usuario");
-      //  }
+      //
 
 
-        //txtUser.setText("marcotally95@gmail.com");
+        lblUser.setText(getIntent().getExtras().getString("usuario"));
 
         //txtUser = (TextView)findViewById(R.id.email);
         //String user= getIntent().getStringExtra("names");
