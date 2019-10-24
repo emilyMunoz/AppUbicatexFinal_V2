@@ -79,14 +79,14 @@ public class MainActivity extends AppCompatActivity
         //txtUser.setText(user);
 
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        /*FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Debes iniciar sesion o registrarse", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -167,8 +167,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_parada) {
             fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentParadas()).commit();
 
-        } else if(id == R.id.nav_solicitud){
-            fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentSolicitud()).commit();
+
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

@@ -1,30 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view"
+    android:src="@drawable/edificios"
+    app:itemIconTint="@color/PRUEba"
+    app:itemTextColor="#000"
+    app:itemBackground="@color/PRUEba">
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/house"
             android:title="@string/menu_home" />
-        <!--item
-            android:id="@+id/nav_inicio"
-            android:icon="@drawable/iniciosesion"
-            android:title="@string/menu_inicio" />
-        <item
-            android:id="@+id/nav_registro"
-            android:icon="@drawable/user"
-            android:title="@string/menu_registro" /-->
 
     </group>
 
-    <item android:title="Cotegorias">
+    <item android:title="Filtrar por categorías">
         <menu>
+            <group android:checkableBehavior="single">
             <item
                 android:id="@+id/nav_comercio"
                 android:icon="@drawable/tienda"
-                android:title="@string/menu_comercios" />
+                android:title="@string/menu_pulperias" />
+
+                <item
+                    android:id="@+id/nav_sodas"
+                    android:icon="@drawable/sodasyrestaurantes"
+                    android:title="@string/menu_sodas" />
+
+                <item
+                    android:id="@+id/nav_llanteras"
+                    android:icon="@drawable/tire_application_2924"
+                    android:title="@string/menu_llanteras" />
+ </group>
+
             <item
                 android:id="@+id/nav_turismo"
                 android:icon="@drawable/turimo4"
@@ -36,10 +46,10 @@
                 android:title="@string/menu_paradas" />
         </menu>
     </item>
-    <item
+    <!--item
         android:id="@+id/nav_solicitud"
         android:icon="@drawable/soli8"
-        android:title="@string/menu_solicitudes" />
+        android:title="@string/menu_solicitudes" /-->
 
 
 </menu>

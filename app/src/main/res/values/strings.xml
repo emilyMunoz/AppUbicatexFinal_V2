@@ -1,5 +1,5 @@
-<resources>
-    <string name="app_name">Ubicatex</string>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <string name="app_name">UbicateX</string>
     <string name="app_name2">Locales</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -14,8 +14,11 @@
     <string name="menu_registro">Registrarse</string>
     <string name="menu_inicio">Iniciar sesion</string>
     <string name="menu_comercios">Locales</string>
+    <string name="menu_sodas">Sodas</string>
+    <string name="menu_pulperias">Pulperias</string>
+    <string name="menu_llanteras">Llanteras</string>
     <string name="menu_paradas">Paradas</string>
-    <string name="menu_turismo">Centros turisticos</string>
+    <string name="menu_turismo">Centros turísticos</string>
     <string name="menu_solicitudes">Solicitudes de ubicación</string>
     <string name="action_settings">Salir</string>
 
