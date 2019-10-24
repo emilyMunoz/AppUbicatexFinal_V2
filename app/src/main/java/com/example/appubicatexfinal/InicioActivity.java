@@ -26,7 +26,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
     private Button btnIngresar;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
-    private Button btnRegistrarse;
+    //private Button btnRegistrarse;
 
 
 
@@ -41,10 +41,10 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         textEmail = findViewById(R.id.email);
         textPassword = findViewById(R.id.password);
         btnIngresar =  findViewById(R.id.btn_iniciarsesion);
-        btnRegistrarse = findViewById(R.id.btn_registrarseINICIO);
+
         progressDialog = new ProgressDialog(this);
         btnIngresar.setOnClickListener(this);
-        btnRegistrarse.setOnClickListener(this);
+        //btnRegistrarse.setOnClickListener(this);
     }
 
 
@@ -115,18 +115,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
+        iniciarSesion();
 
-            case R.id.btn_iniciarsesion:
-                iniciarSesion();
-                break;
-
-            case R.id.btn_registrarseINICIO:
-               Intent inten = new Intent(InicioActivity.this,RegistrarseActivity.class);
-               startActivity(inten);
-                break;
-
-        }
-     //   iniciarSesion();
     }
 }

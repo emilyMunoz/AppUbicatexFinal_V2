@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".comercios"></activity>
+
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_registrarse"
@@ -21,8 +21,15 @@
             android:name=".RegistrarseActivity"
             android:label="@string/title_activity_registrarse"
             android:theme="@style/AppTheme.NoActionBar" />
+
+
+        <activity android:name=".InicioActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <activity
-            android:name=".InicioActivity"
+            android:name=".PrincipalActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
