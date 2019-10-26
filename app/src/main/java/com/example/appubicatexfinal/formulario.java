@@ -60,7 +60,6 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
       inicializarFirebase();
       listarDatos();
 
-
     }
 
     private void listarDatos() {
@@ -122,7 +121,6 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
         txtnombre.setText("");
         txttelefono.setText("");
     }
-
 
     @Override
     public void onClick(View v) {
