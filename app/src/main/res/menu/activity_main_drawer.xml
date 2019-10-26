@@ -26,7 +26,7 @@
 
                 <item
                     android:id="@+id/nav_sodas"
-                    android:icon="@drawable/sodasyrestaurantes"
+                    android:icon="@drawable/restaurant_menu_118721"
                     android:title="@string/menu_sodas" />
 
                 <item
@@ -46,10 +46,10 @@
                 android:title="@string/menu_paradas" />
         </menu>
     </item>
-    <!--item
-        android:id="@+id/nav_solicitud"
-        android:icon="@drawable/soli8"
-        android:title="@string/menu_solicitudes" /-->
+    <item
+        android:id="@+id/nav_formulario"
+        android:icon="@drawable/marker"
+        android:title="@string/menu_formulario" />
 
 
 </menu>

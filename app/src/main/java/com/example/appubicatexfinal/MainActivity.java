@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity
 
      //public static final String user = "names";
      private TextView lblUser;
+     private MapView mapView;
 
-    private MapView mapView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,12 +162,16 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_turismo) {
-            fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentTurismo()).commit();
+            Intent intent2 = new Intent(MainActivity.this,formulario.class);
+            startActivity(intent2);
 
         } else if (id == R.id.nav_parada) {
             fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentParadas()).commit();
 
 
+        }else if (id == R.id.nav_formulario){
+            Intent intent3 = new Intent(MainActivity.this,formulario.class);
+            startActivity(intent3);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

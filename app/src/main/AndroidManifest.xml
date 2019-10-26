@@ -3,6 +3,7 @@
     package="com.example.appubicatexfinal">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
@@ -12,26 +13,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".comercios"
+        <activity android:name=".formulario"></activity>
+        <activity
+            android:name=".comercios"
             android:label="@string/app_name2"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
-
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RegistrarseActivity"
             android:label="@string/title_activity_registrarse"
             android:theme="@style/AppTheme.NoActionBar" />
-
-
-        <activity android:name=".InicioActivity"
+        <activity
+            android:name=".InicioActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".PrincipalActivity"
             android:label="@string/app_name"
