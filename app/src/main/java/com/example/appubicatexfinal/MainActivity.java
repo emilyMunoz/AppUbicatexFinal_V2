@@ -243,12 +243,27 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this,comercios.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_turismo) {
-            Intent intent2 = new Intent(MainActivity.this,formulario.class);
-            startActivity(intent2);
+        } else if (id == R.id.nav_sodas) {
+          /*  Intent intent2 = new Intent(MainActivity.this,formulario.class);
+            startActivity(intent2);*/
+            Intent intent = new Intent(MainActivity.this,Sodas.class);
+            startActivity(intent);
 
-        } else if (id == R.id.nav_parada) {
-            fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentParadas()).commit();
+        } else if (id == R.id.nav_llanteras) {
+           // fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentParadas()).commit();
+            Intent intent = new Intent(MainActivity.this,Llanteras.class);
+            startActivity(intent);
+        }else if (id == R.id.nav_turismo) {
+           // fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentParadas()).commit();
+            Intent intent = new Intent(MainActivity.this,Centros_turisticos.class);
+            startActivity(intent);
+
+        }
+
+        else if (id == R.id.nav_parada) {
+            //fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentParadas()).commit();
+            Intent intent = new Intent(MainActivity.this,Paradas.class);
+            startActivity(intent);
 
 
         }else if (id == R.id.nav_formulario){

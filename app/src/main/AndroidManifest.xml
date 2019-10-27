@@ -13,9 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Paradas"></activity>
+        <activity android:name=".Centros_turisticos" />
+        <activity android:name=".Llanteras" />
+        <activity android:name=".Sodas" />
         <activity
             android:name=".formulario"
-            android:label="@string/menu_formulario"></activity>
+            android:label="@string/menu_formulario" />
         <activity
             android:name=".comercios"
             android:label="@string/app_name2"
