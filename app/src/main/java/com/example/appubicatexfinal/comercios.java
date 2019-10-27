@@ -3,12 +3,17 @@ package com.example.appubicatexfinal;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.appubicatexfinal.model.Marcador;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
@@ -27,7 +32,9 @@ public class comercios extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private MapboxMap mMap;
 
-   // private ArrayList<Marker> tmprealTimeDatabse = new ArrayList<>();
+   //private ArrayList<Marcador>  lisMarcador = new ArrayList<Marcador>();
+   //ArrayAdapter<Marcador>marcadorArrayAdapter;
+
    // private ArrayList<Marker> realTimeMarkers = new ArrayList<>();
 
     @Override
@@ -46,6 +53,7 @@ public class comercios extends AppCompatActivity {
 
             public void onMapReady(@NonNull final MapboxMap mapboxMap) {
                // mMap = mapboxMap;
+
                 mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
                     @Override
                     public void onStyleLoaded(@NonNull Style style) {
@@ -57,28 +65,50 @@ public class comercios extends AppCompatActivity {
                        // .title("Local de prueba")
                        // .snippet("Se vende de todo"));
                 mDatabase.child("Marcadores").addValueEventListener(new ValueEventListener() {
+
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                           // mDatabase.orderByChild(getString(R.string.campo_nombre)).equals("Repuestos gigante");
+                          // mDatabase.addListenerForSingleValueEvent(new ValueEventListener(){
+                                                                      //   @Override
+                                                                       //  public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                        //     int cont = 0;
+                                                                         //    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                                                         //        cont++;
+                                                                          //       Toast.makeText(comercios.this,"Hola estamos aqui", Toast.LENGTH_LONG).show();
+                                                                           //      Toast.makeText(comercios.this,"Encontre"+cont+"ubicaciones con codigo", Toast.LENGTH_LONG).show();
+                                                                           //  }
+                                                                       //  }
+
+                                                                      //   @Override
+                                                                       //  public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                                       //  }
+                                                                 //    });
+
+                            //mDatabase.orderByChild(getString(R.string.campo_codigo)).equals("2");
+                            //Toast.makeText(comercios.this,"Hola estamos aqui", Toast.LENGTH_LONG).show();
+
                             Marcador mk = snapshot.getValue(Marcador.class);
                             double latitud = mk.getLatitud();
                             double longitud = mk.getLongitud();
                             String nombre = mk.getNombre();
                             int codigo = mk.getCodigo();
-
                             // int telefono = mk.getTelefono();
 
-                            // MarkerOptions markerOptions = new MarkerOptions();
 
+                            //mDatabase.orderByChild(getString(R.string.campo_codigo)).equals("2");
+                           // Toast.makeText(comercios.this,"Hola estamos aqui", Toast.LENGTH_LONG).show();
+                            //mDatabase.addListenerForSingleValueEvent(this);
                                 mapboxMap.addMarker(new MarkerOptions()
                                         .position(new LatLng(latitud, longitud))
                                         .title(nombre));
-                                //markerOptions.position(new LatLng(latitud,longitud));
 
                             }
                         }
-
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 

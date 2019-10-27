@@ -16,6 +16,8 @@
     <string name="menu_inicio">Iniciar sesion</string>
     <string name="menu_comercios">Locales</string>
     <string name="menu_formularios">Agregar nuevas localizaciones</string>
+    <string name="campo_nombre">nombre</string>
+    <string name="campo_codigo">codigo</string>
     <string name="menu_sodas">Sodas</string>
     <string name="menu_pulperias">Pulperias</string>
     <string name="menu_llanteras">Llanteras</string>

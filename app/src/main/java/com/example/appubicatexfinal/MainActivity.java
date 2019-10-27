@@ -22,6 +22,11 @@ import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -48,6 +53,7 @@ public class MainActivity extends AppCompatActivity
      private MapView mapView;
      private PermissionsManager permissionsManager;
      private MapboxMap mapboxMap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +107,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onPermissionResult(boolean granted) {
         if (granted) {
-            Toast.makeText(this,"Dentro del if 1", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Tu ubicacion", Toast.LENGTH_LONG).show();
             mapboxMap.getStyle(new Style.OnStyleLoaded() {
                 @Override
                 public void onStyleLoaded(@NonNull Style style) {
@@ -128,7 +134,7 @@ public class MainActivity extends AppCompatActivity
     private void enableLocationComponent(@NonNull Style loadedMapStyle) {
         // Check if permissions are enabled and if not request
         if (PermissionsManager.areLocationPermissionsGranted(this)) {
-            Toast.makeText(this,"Dentro del if ", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Tu ubicacion ", Toast.LENGTH_LONG).show();
             // Get an instance of the component
             LocationComponent locationComponent = mapboxMap.getLocationComponent();
             // Activate with options
@@ -233,9 +239,10 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentHome()).commit();
 
         } else if (id == R.id.nav_comercio) {
-            //fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentComerciales()).commit();
+
             Intent intent = new Intent(MainActivity.this,comercios.class);
             startActivity(intent);
+
 
         } else if (id == R.id.nav_turismo) {
             Intent intent2 = new Intent(MainActivity.this,formulario.class);

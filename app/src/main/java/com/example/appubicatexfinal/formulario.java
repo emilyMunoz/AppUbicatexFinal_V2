@@ -43,6 +43,10 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
+    private ArrayList<Marcador>  lisMarcador = new ArrayList<Marcador>();
+    ArrayAdapter<Marcador>marcadorArrayAdapter;
+
+
     //private List<Marcador> lisMarcador = new ArrayList<Marcador>();
     //ArrayAdapter<Marcador> marcadorArrayAdapter;
 
@@ -55,38 +59,38 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
         textlongitud = findViewById(R.id.longitud);
         txtlatitud = findViewById(R.id.latitud);
         txtnombre = findViewById(R.id.name);
-       // lista_marcadores = findViewById(R.id.lv_datosMarcadores);
+
         btnGuardar =  findViewById(R.id.btn_guardar);
         btnGuardar.setOnClickListener(this);
+        lista_marcadores = findViewById(R.id.lv_datosMarcadores);
 
       inicializarFirebase();
-      //listarDatos();
+      listarDatos();
 
     }
 
-   /* private void listarDatos() {
-        databaseReference.child("Marcadores").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                lisMarcador.clear();
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()){
-                    Marcador m= objSnapshot.getValue(Marcador.class);
-                    lisMarcador.add(m);
+    private void listarDatos() {
+            databaseReference.child("Marcadores").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    lisMarcador.clear();
+                    for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                        Marcador m = objSnapshot.getValue(Marcador.class);
+                        lisMarcador.add(m);
 
-                    marcadorArrayAdapter =  new ArrayAdapter<Marcador>(formulario.this,android.R.layout.simple_list_item_1,lisMarcador);
-                    lista_marcadores.setAdapter(marcadorArrayAdapter);
+                        marcadorArrayAdapter = new ArrayAdapter<Marcador>(formulario.this, android.R.layout.simple_list_item_1, lisMarcador);
+                        lista_marcadores.setAdapter(marcadorArrayAdapter);
 
                     }
                 }
 
+                @Override
+                 public void onCancelled(DatabaseError databaseError) {
 
+                }
+            });
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }*/
 
     private void inicializarFirebase() {
         FirebaseApp.initializeApp(this);

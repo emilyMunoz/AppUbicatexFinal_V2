@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Marcador {
 
-    private int codigo;
+    private int codigo ;
     private String nombre;
     //private int telefono;
     private double longitud;
