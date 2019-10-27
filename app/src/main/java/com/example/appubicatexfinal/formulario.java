@@ -27,21 +27,24 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Double.parseDouble;
+
 public class formulario extends AppCompatActivity implements View.OnClickListener{
 
-    private List<Marcador> lisMarcador = new ArrayList<Marcador>();
-    ArrayAdapter<Marcador> marcadorArrayAdapter;
+
 
     EditText textCodigo;
     EditText textlongitud;
     EditText txtlatitud;
     EditText txtnombre;
-    EditText txttelefono;
     Button btnGuardar;
     ListView lista_marcadores;
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+
+    //private List<Marcador> lisMarcador = new ArrayList<Marcador>();
+    //ArrayAdapter<Marcador> marcadorArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,17 +55,16 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
         textlongitud = findViewById(R.id.longitud);
         txtlatitud = findViewById(R.id.latitud);
         txtnombre = findViewById(R.id.name);
-        txttelefono = findViewById(R.id.tel);
-        lista_marcadores = findViewById(R.id.lv_datosMarcadores);
+       // lista_marcadores = findViewById(R.id.lv_datosMarcadores);
         btnGuardar =  findViewById(R.id.btn_guardar);
         btnGuardar.setOnClickListener(this);
 
       inicializarFirebase();
-      listarDatos();
+      //listarDatos();
 
     }
 
-    private void listarDatos() {
+   /* private void listarDatos() {
         databaseReference.child("Marcadores").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -84,7 +86,7 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
 
             }
         });
-    }
+    }*/
 
     private void inicializarFirebase() {
         FirebaseApp.initializeApp(this);
@@ -119,24 +121,26 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
         textlongitud.setText("");
         txtlatitud.setText("");
         txtnombre.setText("");
-        txttelefono.setText("");
+
     }
 
     @Override
     public void onClick(View v) {
         int codigo = Integer.parseInt(textCodigo.getText().toString());
-        int longitud =Integer.parseInt(textlongitud.getText().toString());
-        int latitud = Integer.parseInt(txtlatitud.getText().toString());
+        double longitud =Double.parseDouble(textlongitud.getText().toString());
+        double latitud = Double.parseDouble(txtlatitud.getText().toString());
         String nombre = txtnombre.getText().toString();
-        int telefono = Integer.parseInt(txttelefono.getText().toString());
+
+
         validacion();
+
         Marcador m = new Marcador();
         m.setCodigo(codigo);
         m.setLongitud(longitud);
         m.setLatitud(latitud);
         m.setNombre(nombre);
-        m.setTelefono(telefono);
-        databaseReference.child("Marcadores").setValue(m);
+
+        databaseReference.child("Marcadores").child(m.getNombre()).setValue(m);
         Toast.makeText(formulario.this,"Marcador guardado exitosamente!",Toast.LENGTH_LONG).show();
         limpiar();
     }

@@ -1,12 +1,17 @@
 package com.example.appubicatexfinal.model;
 
+import com.mapbox.mapboxsdk.annotations.Marker;
+
+import java.util.ArrayList;
+
 public class Marcador {
 
     private int codigo;
     private String nombre;
-    private int telefono;
-    private int longitud;
-    private int latitud;
+    //private int telefono;
+    private double longitud;
+    private double latitud;
+
 
     public Marcador() {
 
@@ -29,27 +34,27 @@ public class Marcador {
         this.nombre = nombre;
     }
 
-    public int getTelefono() {
-        return telefono;
-    }
+    //public int getTelefono() {
+       // return telefono;
+    //}
 
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
-    }
+   // public void setTelefono(int telefono) {
+       // this.telefono = telefono;
+   // }
 
-    public int getLongitud() {
+    public double getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(int longitud) {
+    public void setLongitud(double longitud) {
         this.longitud = longitud;
     }
 
-    public int getLatitud() {
+    public double getLatitud() {
         return latitud;
     }
 
-    public void setLatitud(int latitud) {
+    public void setLatitud(double latitud) {
         this.latitud = latitud;
     }
 

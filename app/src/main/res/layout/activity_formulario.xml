@@ -6,14 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".formulario">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical"
+        android:layout_marginTop="140dp"
         android:padding="16dp">
 
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Agregar marcadores"
+            android:fontFamily="cursive"
+            android:textSize="30dp"
+            android:paddingLeft="70dp"
+            android:paddingRight="10dp"
+            android:textColor="#000"/>
+
         <EditText
+
             android:id="@+id/lcodigo"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -23,7 +37,7 @@
             android:paddingRight="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:inputType="number"
+            android:inputType="text"
             android:textColorHint="#ccc"
             android:background="@drawable/textedit_redondo_negro"
             android:textColor="#000"
@@ -39,7 +53,7 @@
         android:paddingRight="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:inputType="textEmailAddress"
+        android:inputType="text"
         android:textColorHint="#ccc"
         android:background="@drawable/textedit_redondo_negro"
         android:textColor="#000"
@@ -55,7 +69,7 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:hint="Latitud"
-        android:inputType="number"
+        android:inputType="text"
         android:textColorHint="#ccc"
         android:background="@drawable/textedit_redondo_negro"
         android:textColor="#000"/>
@@ -74,20 +88,7 @@
             android:textColorHint="#ccc"
             android:background="@drawable/textedit_redondo_negro"
             android:textColor="#000"/>
-        <EditText
-            android:id="@+id/tel"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="15dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:hint="telefono"
-            android:inputType="text|phone"
-            android:textColorHint="#ccc"
-            android:background="@drawable/textedit_redondo_negro"
-            android:textColor="#000"/>
+
     <Button
         android:id="@+id/btn_guardar"
         android:layout_width="match_parent"
@@ -98,7 +99,7 @@
         android:background="@drawable/boton_redondo"
         />
 
-        <TextView
+        <!--TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="10dp"
@@ -111,7 +112,7 @@
         <ListView
             android:id="@+id/lv_datosMarcadores"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></ListView>
+            android:layout_height="match_parent"></ListView-->
     </LinearLayout>
 
 </RelativeLayout>
