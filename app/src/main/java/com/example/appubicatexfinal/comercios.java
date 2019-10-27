@@ -1,9 +1,15 @@
 package com.example.appubicatexfinal;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -26,7 +32,7 @@ import com.mapbox.mapboxsdk.maps.Style;
 
 import java.util.ArrayList;
 
-public class comercios extends AppCompatActivity {
+public class comercios extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private MapView mapView;
     private DatabaseReference mDatabase;
@@ -71,43 +77,19 @@ public class comercios extends AppCompatActivity {
 
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                           // mDatabase.orderByChild(getString(R.string.campo_nombre)).equals("Repuestos gigante");
-                          // mDatabase.addListenerForSingleValueEvent(new ValueEventListener(){
-                                                                      //   @Override
-                                                                       //  public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                                        //     int cont = 0;
-                                                                         //    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                                                         //        cont++;
-                                                                          //       Toast.makeText(comercios.this,"Hola estamos aqui", Toast.LENGTH_LONG).show();
-                                                                           //      Toast.makeText(comercios.this,"Encontre"+cont+"ubicaciones con codigo", Toast.LENGTH_LONG).show();
-                                                                           //  }
-                                                                       //  }
-
-                                                                      //   @Override
-                                                                       //  public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                                       //  }
-                                                                 //    });
-
-                            //mDatabase.orderByChild(getString(R.string.campo_codigo)).equals("2");
-                            //Toast.makeText(comercios.this,"Hola estamos aqui", Toast.LENGTH_LONG).show();
-
                             Marcador mk = snapshot.getValue(Marcador.class);
                             double latitud = mk.getLatitud();
                             double longitud = mk.getLongitud();
                             String nombre = mk.getNombre();
                             int codigo = mk.getCodigo();
                             // int telefono = mk.getTelefono();
-
-
-                            //mDatabase.orderByChild(getString(R.string.campo_codigo)).equals("2");
-                           // Toast.makeText(comercios.this,"Hola estamos aqui", Toast.LENGTH_LONG).show();
-                            //mDatabase.addListenerForSingleValueEvent(this);
+                            if (codigo == 1) {
                                 mapboxMap.addMarker(new MarkerOptions()
                                         .position(new LatLng(latitud, longitud))
                                         .title(nombre));
 
                             }
+                        }
                         }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -115,7 +97,7 @@ public class comercios extends AppCompatActivity {
                     }
                 });
 
-            }
+             }
         });
 
     }
@@ -156,4 +138,31 @@ public class comercios extends AppCompatActivity {
         mapView.onDestroy();
     }
 
-}
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+
+        if (id == R.id.nav_home) {
+
+            Intent intent2 = new Intent(comercios.this,MainActivity.class);
+            startActivity(intent2);
+
+        } else if (id == R.id.nav_turismo) {
+
+
+        } else if (id == R.id.nav_parada) {
+
+
+
+        }else if (id == R.id.nav_formulario){
+            Intent intent3 = new Intent(comercios.this,formulario.class);
+            startActivity(intent3);
+
+        }
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+   }
+

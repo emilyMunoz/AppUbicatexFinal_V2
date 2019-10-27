@@ -3,7 +3,7 @@
     package="com.example.appubicatexfinal">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
@@ -13,10 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".formulario"
-            android:label="@string/menu_formulario">
-
-        </activity>
+        <activity
+            android:name=".formulario"
+            android:label="@string/menu_formulario"></activity>
         <activity
             android:name=".comercios"
             android:label="@string/app_name2"
@@ -31,7 +30,7 @@
         <activity
             android:name=".InicioActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PrincipalActivity"
             android:label="@string/app_name"

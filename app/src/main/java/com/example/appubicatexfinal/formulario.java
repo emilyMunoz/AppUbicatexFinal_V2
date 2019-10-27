@@ -3,14 +3,17 @@ package com.example.appubicatexfinal;
 import android.app.IntentService;
 import android.app.ProgressDialog;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.appubicatexfinal.model.Marcador;
@@ -29,9 +32,7 @@ import java.util.List;
 
 import static java.lang.Double.parseDouble;
 
-public class formulario extends AppCompatActivity implements View.OnClickListener{
-
-
+public class formulario extends AppCompatActivity implements View.OnClickListener {
 
     EditText textCodigo;
     EditText textlongitud;
@@ -40,15 +41,13 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
     Button btnGuardar;
     ListView lista_marcadores;
 
+
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
     private ArrayList<Marcador>  lisMarcador = new ArrayList<Marcador>();
     ArrayAdapter<Marcador>marcadorArrayAdapter;
 
-
-    //private List<Marcador> lisMarcador = new ArrayList<Marcador>();
-    //ArrayAdapter<Marcador> marcadorArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +59,7 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
         txtlatitud = findViewById(R.id.latitud);
         txtnombre = findViewById(R.id.name);
 
+       // spiner = findViewById(R.id.categoria);
         btnGuardar =  findViewById(R.id.btn_guardar);
         btnGuardar.setOnClickListener(this);
         lista_marcadores = findViewById(R.id.lv_datosMarcadores);
@@ -67,29 +67,36 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
       inicializarFirebase();
       listarDatos();
 
+
     }
 
     private void listarDatos() {
-            databaseReference.child("Marcadores").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    lisMarcador.clear();
-                    for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
-                        Marcador m = objSnapshot.getValue(Marcador.class);
-                        lisMarcador.add(m);
 
-                        marcadorArrayAdapter = new ArrayAdapter<Marcador>(formulario.this, android.R.layout.simple_list_item_1, lisMarcador);
-                        lista_marcadores.setAdapter(marcadorArrayAdapter);
 
-                    }
-                }
 
-                @Override
-                 public void onCancelled(DatabaseError databaseError) {
+           databaseReference.child("Marcadores").addValueEventListener(new ValueEventListener() {
+               @Override
+               public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                   lisMarcador.clear();
+                   for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                             Marcador m = objSnapshot.getValue(Marcador.class);
+                           lisMarcador.add(m);
 
-                }
-            });
-        }
+                           marcadorArrayAdapter = new ArrayAdapter<Marcador>(formulario.this, android.R.layout.simple_list_item_1, lisMarcador);
+                           lista_marcadores.setAdapter(marcadorArrayAdapter);
+
+
+                       }
+
+
+               }
+               @Override
+               public void onCancelled(DatabaseError databaseError) {
+
+               }
+           });
+       }
+
 
 
     private void inicializarFirebase() {

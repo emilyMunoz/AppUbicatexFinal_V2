@@ -25,6 +25,7 @@
     <string name="menu_turismo">Centros turísticos</string>
     <string name="menu_solicitudes">Solicitudes de ubicación</string>
     <string name="menu_formulario">Agregar marcadores</string>
+    <string name="menu_pulperia">Agregar pulperias</string>
     <string name="action_settings">Salir</string>
 
     <!-- TODO: Remove or change this placeholder text -->

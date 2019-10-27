@@ -238,11 +238,10 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentHome()).commit();
 
-        } else if (id == R.id.nav_comercio) {
+        } else if (id == R.id.nav_pulperia) {
 
             Intent intent = new Intent(MainActivity.this,comercios.class);
             startActivity(intent);
-
 
         } else if (id == R.id.nav_turismo) {
             Intent intent2 = new Intent(MainActivity.this,formulario.class);
@@ -255,8 +254,8 @@ public class MainActivity extends AppCompatActivity
         }else if (id == R.id.nav_formulario){
             Intent intent3 = new Intent(MainActivity.this,formulario.class);
             startActivity(intent3);
-        }
 
+        }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
