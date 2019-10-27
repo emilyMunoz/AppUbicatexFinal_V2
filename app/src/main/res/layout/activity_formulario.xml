@@ -12,16 +12,15 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="100dp"
         android:padding="16dp">
 
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Agregar marcadores"
-            android:fontFamily="cursive"
-            android:textSize="30dp"
+            android:text="Administrar marcadores"
+            android:textSize="15dp"
             android:paddingLeft="70dp"
             android:paddingRight="10dp"
             android:textColor="#000"/>
