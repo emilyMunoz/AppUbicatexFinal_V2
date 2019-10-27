@@ -20,89 +20,168 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.mapbox.android.core.permissions.PermissionsListener;
+import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.location.LocationComponent;
+import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions;
+import com.mapbox.mapboxsdk.location.modes.CameraMode;
+import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener ,
+        OnMapReadyCallback, PermissionsListener {
 
-     //public static final String user = "names";
      private TextView lblUser;
+
      private MapView mapView;
+     private PermissionsManager permissionsManager;
+     private MapboxMap mapboxMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Mapbox.getInstance(this, "pk.eyJ1Ijoiam9yZGFuMjM5NCIsImEiOiJjazFqczR0c20xMGg3M3BqeXlzbm5jZWF6In0.W5GGmyAO8gbVBKjf-3vxRQ");
+
+        //COMFIGURACION
+        Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
         setContentView(R.layout.activity_main);
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(@NonNull MapboxMap mapboxMap) {
-                mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
-                    @Override
-                    public void onStyleLoaded(@NonNull Style style) {
-
-                    }
-                });
-                mapboxMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(10.6179738, -85.4501944))
-                        .title("Universidad Nacional Campus Liberia")
-                        .snippet("La U mas cool"));
-            }
-        });
-
-
-
+        mapView.getMapAsync(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         NavigationView navigationView = findViewById(R.id.nav_view);
-       lblUser = navigationView.getHeaderView(0).findViewById(R.id.lblUser);
 
-       //if(false){
-       //     user = getIntent().getExtras().getString("usuario");
-      //
-
-
+        lblUser = navigationView.getHeaderView(0).findViewById(R.id.lblUser);
         lblUser.setText(getIntent().getExtras().getString("usuario"));
-
-        //txtUser = (TextView)findViewById(R.id.email);
-        //String user= getIntent().getStringExtra("names");
-        //txtUser.setText(user);
-
         setSupportActionBar(toolbar);
-        /*FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Debes iniciar sesion o registrarse", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+    }
+    //FIN DEL ONCREATE
 
-
-       /* Intent inten = getIntent();
-        String message = inten.getStringExtra("user");
-        TextView textView = findViewById(R.id.textemail);
-        textView.setText(message);*/
+    //INICIO DE CONFIGURACION DE UBICACION ACTUAL
+    @Override
+    public void onMapReady(@NonNull final MapboxMap mapboxMap) {
+        MainActivity.this.mapboxMap = mapboxMap;
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+            @Override
+            public void onStyleLoaded(@NonNull Style style) {
+                enableLocationComponent(style);
+            }
+        });
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 
+    @Override
+    public void onExplanationNeeded(List<String> permissionsToExplain) {
+        /*R.string.user_location_permission_explanation*/
+        Toast.makeText(this,"Cambiar Toast ", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onPermissionResult(boolean granted) {
+        if (granted) {
+            Toast.makeText(this,"Dentro del if 1", Toast.LENGTH_LONG).show();
+            mapboxMap.getStyle(new Style.OnStyleLoaded() {
+                @Override
+                public void onStyleLoaded(@NonNull Style style) {
+                    enableLocationComponent(style);
+                }
+            });
+        } else {
+            /*R.string.user_location_permission_not_granted*/
+            Toast.makeText(this,"Se Rechazo" , Toast.LENGTH_LONG).show();
+
+            //cuando rechazo se cierra la aplicacon
+            //finish();
+        }
+    }
+
+    @Override
+    @SuppressWarnings( {"MissingPermission"})
+    public void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @SuppressWarnings( {"MissingPermission"})
+    private void enableLocationComponent(@NonNull Style loadedMapStyle) {
+        // Check if permissions are enabled and if not request
+        if (PermissionsManager.areLocationPermissionsGranted(this)) {
+            Toast.makeText(this,"Dentro del if ", Toast.LENGTH_LONG).show();
+            // Get an instance of the component
+            LocationComponent locationComponent = mapboxMap.getLocationComponent();
+            // Activate with options
+            locationComponent.activateLocationComponent(
+                    LocationComponentActivationOptions.builder(this, loadedMapStyle).build());
+            // Enable to make component visible
+            locationComponent.setLocationComponentEnabled(true);
+            // Set the component's camera mode
+            locationComponent.setCameraMode(CameraMode.TRACKING);
+            // Set the component's render mode
+            locationComponent.setRenderMode(RenderMode.COMPASS);
+        } else {
+            permissionsManager = new PermissionsManager(this);
+            permissionsManager.requestLocationPermissions(this);
+        }
+    }
+    //FIN DE CONFIGURACION DE UBICACION ACTUAL
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
 
     @Override
     public void onBackPressed() {
@@ -114,14 +193,11 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
         inflater.inflate(R.menu.main,menu);
         return super.onCreateOptionsMenu(menu);
-
     }
 
     @Override
@@ -177,47 +253,5 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        mapView.onStart();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        mapView.onStop();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
     }
 }

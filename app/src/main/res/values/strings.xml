@@ -1,4 +1,5 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <string name="mapbox_access_token">pk.eyJ1IjoidGFsbHk5NSIsImEiOiJjazIyb3d4MXgwb2F2M2RxY2lyMmRzYXhlIn0.n2nl0WTN8Kg1FcaNbY4YjQ</string>
     <string name="app_name">UbicateX</string>
     <string name="app_name2">Locales</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
