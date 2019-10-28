@@ -85,6 +85,15 @@ public class MainActivity extends AppCompatActivity
         //navigationView.setNavigationItemSelectedListener(this);
 
         FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab2 = findViewById(R.id.fab2);
+
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(MainActivity.this,PruebaMenu.class);
+                startActivity(in);
+            }
+        });
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,6 +106,10 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
+
+
+    //boton flotante 2
+
 
    //FIN DEL ONCREATE
 
