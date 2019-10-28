@@ -17,10 +17,18 @@
         <activity android:name=".PruebaMenu"
             android:theme="@style/AppTheme.NoActionBar"/>
 
-        <activity android:name=".Paradas" />
-        <activity android:name=".Centros_turisticos" />
-        <activity android:name=".Llanteras" />
-        <activity android:name=".Sodas" />
+        <activity android:name=".Paradas"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".Centros_turisticos"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".Llanteras"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".Sodas"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".formulario"
             android:label="@string/menu_formulario" />

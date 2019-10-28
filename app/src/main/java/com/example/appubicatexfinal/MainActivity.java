@@ -97,7 +97,8 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
-    //FIN DEL ONCREATE
+
+   //FIN DEL ONCREATE
 
     //INICIO DE CONFIGURACION DE UBICACION ACTUAL
     @Override

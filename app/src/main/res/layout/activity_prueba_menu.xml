@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/edificios"
+    android:weightSum="10"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PruebaMenu">
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       >
+
+       <TextView
+
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/texto"
+           android:text="Menu principal"
+           android:textSize="50sp"
+           android:layout_gravity="center"
+           android:textColor="#fff"
+           android:fontFamily="cursive"
+           android:layout_centerInParent="true"
+           android:textStyle="bold"/>
+
+   </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="40dp"
+        android:layout_width="350dp"
+        android:layout_height="140dp"
+        android:gravity="center"
+        android:clipToPadding="false"
+        android:orientation="horizontal">
+
+
+
+<!--primera-->
+         <android.support.v7.widget.CardView
+             android:layout_weight="1"
+             android:layout_margin="10dp"
+             android:id="@+id/primero"
+             android:layout_width="10dp"
+             android:layout_height="150dp"
+          app:cardCornerRadius="20dp"
+             >
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:orientation="vertical"
+                 android:gravity="center">
+
+             <ImageView
+                 android:layout_width="64dp"
+                 android:layout_height="64dp"
+                 android:src="@drawable/tienda"
+                 android:padding="10dp" />
+
+                 <TextView
+                     style="bold"
+                     android:layout_marginTop="5dp"
+                     android:text="@string/menu_pulperia"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"/>
+
+             </LinearLayout>
+
+
+
+         </android.support.v7.widget.CardView>
+  <!--segunda-->
+        <android.support.v7.widget.CardView
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:id="@+id/segundo"
+            android:layout_width="10dp"
+            android:layout_height="150dp"
+            app:cardCornerRadius="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/restaurant_menu_118721"
+                    android:padding="10dp"/>
+
+
+                <TextView
+                    style="bold"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/menu_sodas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+
+
+        </android.support.v7.widget.CardView>
+
+        <!--Tercera-->
+
+
+        <!--Cuarta-->
+        <!--Quinta-->
+        <!--sexta-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:layout_width="350dp"
+        android:layout_height="140dp"
+        android:gravity="center"
+        android:clipToPadding="false"
+        android:orientation="horizontal">
+
+
+        <!--primera-->
+        <android.support.v7.widget.CardView
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:id="@+id/tercero"
+            android:layout_width="10dp"
+            android:layout_height="150dp"
+            app:cardCornerRadius="20dp">
+
+            <LinearLayout
+                android:layout_margin="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/bus"
+                    android:padding="10dp"/>
+
+
+                <TextView
+                    style="bold"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/menu_paradas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+
+
+        </android.support.v7.widget.CardView>
+        <!--segunda-->
+        <android.support.v7.widget.CardView
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:id="@+id/cuarto"
+            android:layout_width="10dp"
+            android:layout_height="150dp"
+            app:cardCornerRadius="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/turimo4"
+                    android:padding="10dp"/>
+
+                <TextView
+                    style="bold"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/menu_turismo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+
+        </android.support.v7.widget.CardView>
+
+        <!--Tercera-->
+
+
+        <!--Cuarta-->
+        <!--Quinta-->
+        <!--sexta-->
+
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="350dp"
+        android:layout_height="140dp"
+        android:gravity="center"
+        android:clipToPadding="false"
+        android:orientation="horizontal">
+
+
+        <!--primera-->
+        <android.support.v7.widget.CardView
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:id="@+id/quinto"
+            android:layout_width="10dp"
+            android:layout_height="150dp"
+            app:cardCornerRadius="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/tire_application_2924"
+                    android:padding="10dp"
+                   />
+
+
+                <TextView
+                    style="bold"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/menu_llanteras"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+
+
+        </android.support.v7.widget.CardView>
+        <!--segunda-->
+        <android.support.v7.widget.CardView
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:id="@+id/sexto"
+            android:layout_width="10dp"
+            android:layout_height="150dp"
+            app:cardCornerRadius="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/marker"
+                    android:padding="10dp" />
+
+
+                <TextView
+                    style="bold"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/menu_formulario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="175dp"
+        android:layout_height="140dp"
+        android:gravity="center"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+      >
+
+        <android.support.v7.widget.CardView
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:id="@+id/setimo"
+            android:layout_width="10dp"
+            android:layout_height="150dp"
+            app:cardCornerRadius="20dp">
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/house"
+                    android:padding="10dp" />
+
+                <TextView
+                    style="bold"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/menu_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
