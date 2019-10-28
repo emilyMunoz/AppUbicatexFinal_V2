@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".formulario"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start">
-
+    >
 
 
 
@@ -21,6 +19,7 @@
 
 
         <TextView
+            android:paddingTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Administrar marcadores"
@@ -30,11 +29,6 @@
             android:textColor="#000"/>
 
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="1:Pulperia - Comercios, 3:Llanteras, 4:Centros Turisticos, 5:Paradas, 6:Sodas" />
 
         <EditText
 
@@ -42,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="24dp"
-            android:hint="codigo"
+            android:hint="Código"
             android:paddingLeft="20dp"
             android:paddingRight="10dp"
             android:paddingTop="10dp"
@@ -53,21 +47,7 @@
             android:textColor="#000"
             />
 
-    <EditText
-        android:id="@+id/longitud"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="24dp"
-        android:hint="longitud"
-        android:paddingLeft="20dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:inputType="text"
-        android:textColorHint="#ccc"
-        android:background="@drawable/textedit_redondo_negro"
-        android:textColor="#000"
-        />
+
 
     <EditText
         android:id="@+id/latitud"
@@ -83,6 +63,22 @@
         android:textColorHint="#ccc"
         android:background="@drawable/textedit_redondo_negro"
         android:textColor="#000"/>
+
+        <EditText
+            android:id="@+id/longitud"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="24dp"
+            android:hint="Longitud"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:inputType="text"
+            android:textColorHint="#ccc"
+            android:background="@drawable/textedit_redondo_negro"
+            android:textColor="#000"
+            />
 
         <EditText
             android:id="@+id/name"
@@ -113,7 +109,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:layout_margin="10dp"
             android:gravity="center_horizontal"
             android:text="Lista de marcadores">

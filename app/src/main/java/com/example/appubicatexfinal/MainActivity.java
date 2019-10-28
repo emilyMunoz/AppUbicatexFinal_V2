@@ -47,7 +47,7 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener ,
+        implements
         OnMapReadyCallback, PermissionsListener {
 
      private TextView lblUser;
@@ -72,17 +72,17 @@ public class MainActivity extends AppCompatActivity
         mapView.getMapAsync(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        //NavigationView navigationView = findViewById(R.id.nav_view);
 
-        lblUser = navigationView.getHeaderView(0).findViewById(R.id.lblUser);
-        lblUser.setText(getIntent().getExtras().getString("usuario"));
+        //lblUser = navigationView.getHeaderView(0).findViewById(R.id.lblUser);
+       // lblUser.setText(getIntent().getExtras().getString("usuario"));
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
+       // DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        //ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+            //    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+      //  drawer.addDrawerListener(toggle);
+       // toggle.syncState();
+        //navigationView.setNavigationItemSelectedListener(this);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -231,15 +231,7 @@ public class MainActivity extends AppCompatActivity
         mapView.onSaveInstanceState(outState);
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -253,12 +245,12 @@ public class MainActivity extends AppCompatActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        //int id = item.getItemId();
+        int id = item.getItemId();
         Intent i;
         switch (item.getItemId()){
 
             case R.id.action_cerrarsesion:
-                i = new Intent(this,InicioActivity.class);
+                i = new Intent(this,PruebaMenu.class);
                 startActivity(i);
                 break;
 
@@ -270,40 +262,5 @@ public class MainActivity extends AppCompatActivity
              return true;
         }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        if (id == R.id.nav_home) {
-            fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentHome()).commit();
-        } else if (id == R.id.nav_pulperia) {
-            Intent intent = new Intent(MainActivity.this,comercios.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_sodas) {
-          /*  Intent intent2 = new Intent(MainActivity.this,formulario.class);
-            startActivity(intent2);*/
-            Intent intent = new Intent(MainActivity.this,Sodas.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_llanteras) {
-           // fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentParadas()).commit();
-            Intent intent = new Intent(MainActivity.this,Llanteras.class);
-            startActivity(intent);
-        }else if (id == R.id.nav_turismo) {
-           // fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentParadas()).commit();
-            Intent intent = new Intent(MainActivity.this,Centros_turisticos.class);
-            startActivity(intent);
-        }else if (id == R.id.nav_parada) {
-            //fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentParadas()).commit();
-            Intent intent = new Intent(MainActivity.this,Paradas.class);
-            startActivity(intent);
-        }else if (id == R.id.nav_formulario){
-            Intent intent3 = new Intent(MainActivity.this,formulario.class);
-            startActivity(intent3);
-        }
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
+
 }

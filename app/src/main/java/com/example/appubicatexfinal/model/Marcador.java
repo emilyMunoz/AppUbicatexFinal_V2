@@ -61,8 +61,8 @@ public class Marcador {
     @Override
     public String toString() {
 
-          return "Nombre:"+ nombre +
-                " \n Codigo : " + codigo +
+          return "\n Nombre: "+ nombre +
+                "\n Codigo: " + codigo +
                 "\n Longitud: "+ longitud +
                 "\n Latitud: "+ latitud;
     }

@@ -23,7 +23,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 
-public class Centros_turisticos extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class Centros_turisticos extends AppCompatActivity{
 
     private MapView mapView;
     private DatabaseReference mDatabase;
@@ -122,30 +122,5 @@ public class Centros_turisticos extends AppCompatActivity implements NavigationV
         mapView.onDestroy();
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
 
-
-        if (id == R.id.nav_home) {
-
-            Intent intent2 = new Intent(Centros_turisticos.this,MainActivity.class);
-            startActivity(intent2);
-
-        } else if (id == R.id.nav_turismo) {
-
-
-        } else if (id == R.id.nav_parada) {
-
-
-
-        }else if (id == R.id.nav_formulario){
-            Intent intent3 = new Intent(Centros_turisticos.this,formulario.class);
-            startActivity(intent3);
-
-        }
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 }

@@ -32,8 +32,7 @@ import com.mapbox.mapboxsdk.maps.Style;
 
 import java.util.ArrayList;
 
-public class comercios extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+public class comercios extends AppCompatActivity{
 
     private MapView mapView;
     private DatabaseReference mDatabase;
@@ -139,31 +138,6 @@ public class comercios extends AppCompatActivity
         mapView.onDestroy();
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
 
-
-        if (id == R.id.nav_home) {
-
-            Intent intent2 = new Intent(comercios.this,MainActivity.class);
-            startActivity(intent2);
-
-        } else if (id == R.id.nav_turismo) {
-
-
-        } else if (id == R.id.nav_parada) {
-
-
-
-        }else if (id == R.id.nav_formulario){
-            Intent intent3 = new Intent(comercios.this,formulario.class);
-            startActivity(intent3);
-
-        }
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
    }
 
