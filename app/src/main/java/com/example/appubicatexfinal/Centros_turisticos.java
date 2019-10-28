@@ -69,7 +69,7 @@ public class Centros_turisticos extends AppCompatActivity implements NavigationV
                             String nombre = mk.getNombre();
                             int codigo = mk.getCodigo();
                             // int telefono = mk.getTelefono();
-                            if (codigo == 1) {
+                            if (codigo == 4) {
                                 mapboxMap.addMarker(new MarkerOptions()
                                         .position(new LatLng(latitud, longitud))
                                         .title(nombre));

@@ -69,7 +69,7 @@ public class Paradas extends AppCompatActivity implements NavigationView.OnNavig
                             String nombre = mk.getNombre();
                             int codigo = mk.getCodigo();
                             // int telefono = mk.getTelefono();
-                            if (codigo == 1) {
+                            if (codigo == 5) {
                                 mapboxMap.addMarker(new MarkerOptions()
                                         .position(new LatLng(latitud, longitud))
                                         .title(nombre));

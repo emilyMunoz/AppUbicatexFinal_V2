@@ -68,7 +68,7 @@ public class Llanteras extends AppCompatActivity implements NavigationView.OnNav
                             String nombre = mk.getNombre();
                             int codigo = mk.getCodigo();
                             // int telefono = mk.getTelefono();
-                            if (codigo == 1) {
+                            if (codigo == 3) {
                                 mapboxMap.addMarker(new MarkerOptions()
                                         .position(new LatLng(latitud, longitud))
                                         .title(nombre));

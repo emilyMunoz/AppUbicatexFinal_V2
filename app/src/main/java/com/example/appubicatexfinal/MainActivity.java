@@ -22,6 +22,7 @@ import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.appubicatexfinal.model.Marcador;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +32,7 @@ import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions;
@@ -54,12 +56,15 @@ public class MainActivity extends AppCompatActivity
      private PermissionsManager permissionsManager;
      private MapboxMap mapboxMap;
 
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //COMFIGURACION
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        //CONFIGURACIÓN DE ARRANQUE DEL MAPBOX
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
         setContentView(R.layout.activity_main);
         mapView = findViewById(R.id.mapView);
@@ -78,6 +83,19 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mapboxMap.getStyle(new Style.OnStyleLoaded() {
+                    @Override
+                    public void onStyleLoaded(@NonNull Style style) {
+                        enableLocationComponent(style);
+                    }
+                });
+            }
+        });
     }
     //FIN DEL ONCREATE
 
@@ -89,6 +107,27 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onStyleLoaded(@NonNull Style style) {
                 enableLocationComponent(style);
+            }
+        });
+        mDatabase.child("Marcadores").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                    Marcador mk = snapshot.getValue(Marcador.class);
+                    double latitud = mk.getLatitud();
+                    double longitud = mk.getLongitud();
+                    String nombre = mk.getNombre();
+                    int codigo = mk.getCodigo();
+                    // int telefono = mk.getTelefono();
+                    mapboxMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(latitud, longitud))
+                            .title(nombre));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
     }
@@ -134,7 +173,7 @@ public class MainActivity extends AppCompatActivity
     private void enableLocationComponent(@NonNull Style loadedMapStyle) {
         // Check if permissions are enabled and if not request
         if (PermissionsManager.areLocationPermissionsGranted(this)) {
-            Toast.makeText(this,"Tu ubicacion ", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Tu ubicacion", Toast.LENGTH_LONG).show();
             // Get an instance of the component
             LocationComponent locationComponent = mapboxMap.getLocationComponent();
             // Activate with options
@@ -146,6 +185,9 @@ public class MainActivity extends AppCompatActivity
             locationComponent.setCameraMode(CameraMode.TRACKING);
             // Set the component's render mode
             locationComponent.setRenderMode(RenderMode.COMPASS);
+
+            locationComponent.zoomWhileTracking(15.0);
+
         } else {
             permissionsManager = new PermissionsManager(this);
             permissionsManager.requestLocationPermissions(this);
@@ -233,22 +275,17 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        FragmentManager fragmentManager=getSupportFragmentManager();
-
+        FragmentManager fragmentManager = getSupportFragmentManager();
         if (id == R.id.nav_home) {
             fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentHome()).commit();
-
         } else if (id == R.id.nav_pulperia) {
-
             Intent intent = new Intent(MainActivity.this,comercios.class);
             startActivity(intent);
-
         } else if (id == R.id.nav_sodas) {
           /*  Intent intent2 = new Intent(MainActivity.this,formulario.class);
             startActivity(intent2);*/
             Intent intent = new Intent(MainActivity.this,Sodas.class);
             startActivity(intent);
-
         } else if (id == R.id.nav_llanteras) {
            // fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentParadas()).commit();
             Intent intent = new Intent(MainActivity.this,Llanteras.class);
@@ -257,19 +294,13 @@ public class MainActivity extends AppCompatActivity
            // fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentParadas()).commit();
             Intent intent = new Intent(MainActivity.this,Centros_turisticos.class);
             startActivity(intent);
-
-        }
-
-        else if (id == R.id.nav_parada) {
+        }else if (id == R.id.nav_parada) {
             //fragmentManager.beginTransaction().replace(R.id.contenedor,new FragmentParadas()).commit();
             Intent intent = new Intent(MainActivity.this,Paradas.class);
             startActivity(intent);
-
-
         }else if (id == R.id.nav_formulario){
             Intent intent3 = new Intent(MainActivity.this,formulario.class);
             startActivity(intent3);
-
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

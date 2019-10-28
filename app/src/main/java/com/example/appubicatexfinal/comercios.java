@@ -32,7 +32,8 @@ import com.mapbox.mapboxsdk.maps.Style;
 
 import java.util.ArrayList;
 
-public class comercios extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class comercios extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     private MapView mapView;
     private DatabaseReference mDatabase;
