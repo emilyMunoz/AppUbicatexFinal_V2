@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center"
@@ -10,13 +10,18 @@
     android:layout_height="match_parent"
     tools:context=".PruebaMenu">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#a8000000">
+
    <RelativeLayout
+       android:layout_marginTop="10dp"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       >
+       android:layout_height="wrap_content">
 
        <TextView
-
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:id="@+id/texto"
@@ -26,29 +31,26 @@
            android:textColor="#fff"
            android:fontFamily="cursive"
            android:layout_centerInParent="true"
-           android:textStyle="bold"/>
+           android:textStyle="bold"
+           />
 
    </RelativeLayout>
 
-
     <LinearLayout
-        android:layout_marginTop="40dp"
-        android:layout_width="350dp"
-        android:layout_height="140dp"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
         android:gravity="center"
-        android:clipToPadding="false"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
-
-
-<!--primera-->
          <android.support.v7.widget.CardView
              android:layout_weight="1"
-             android:layout_margin="10dp"
+             android:layout_margin="9dp"
              android:id="@+id/primero"
              android:layout_width="10dp"
              android:layout_height="150dp"
-          app:cardCornerRadius="20dp"
              >
 
              <LinearLayout
@@ -58,9 +60,9 @@
                  android:gravity="center">
 
              <ImageView
-                 android:layout_width="64dp"
+                 android:layout_width="match_parent"
                  android:layout_height="64dp"
-                 android:src="@drawable/tienda"
+                 android:src="@drawable/tiendac"
                  android:padding="10dp" />
 
                  <TextView
@@ -73,16 +75,14 @@
              </LinearLayout>
 
 
-
          </android.support.v7.widget.CardView>
-  <!--segunda-->
+
         <android.support.v7.widget.CardView
             android:layout_weight="1"
             android:layout_margin="10dp"
             android:id="@+id/segundo"
-            android:layout_width="10dp"
-            android:layout_height="150dp"
-            app:cardCornerRadius="20dp">
+            android:layout_width="9dp"
+            android:layout_height="150dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -91,9 +91,9 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="64dp"
+                    android:layout_width="match_parent"
                     android:layout_height="64dp"
-                    android:src="@drawable/restaurant_menu_118721"
+                    android:src="@drawable/sodap"
                     android:padding="10dp"/>
 
 
@@ -109,32 +109,24 @@
 
         </android.support.v7.widget.CardView>
 
-        <!--Tercera-->
-
-
-        <!--Cuarta-->
-        <!--Quinta-->
-        <!--sexta-->
-
     </LinearLayout>
 
     <LinearLayout
-        android:layout_margin="10dp"
-        android:layout_width="350dp"
-        android:layout_height="140dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
         android:gravity="center"
-        android:clipToPadding="false"
+        android:layout_margin="10dp"
         android:orientation="horizontal">
 
 
-        <!--primera-->
+
         <android.support.v7.widget.CardView
             android:layout_weight="1"
             android:layout_margin="10dp"
             android:id="@+id/tercero"
             android:layout_width="10dp"
-            android:layout_height="150dp"
-            app:cardCornerRadius="20dp">
+            android:layout_height="150dp">
 
             <LinearLayout
                 android:layout_margin="16dp"
@@ -144,9 +136,9 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="64dp"
+                    android:layout_width="match_parent"
                     android:layout_height="64dp"
-                    android:src="@drawable/bus"
+                    android:src="@drawable/busamarillo"
                     android:padding="10dp"/>
 
 
@@ -161,14 +153,13 @@
 
 
         </android.support.v7.widget.CardView>
-        <!--segunda-->
+
         <android.support.v7.widget.CardView
             android:layout_weight="1"
             android:layout_margin="10dp"
             android:id="@+id/cuarto"
             android:layout_width="10dp"
-            android:layout_height="150dp"
-            app:cardCornerRadius="20dp">
+            android:layout_height="150dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -177,9 +168,9 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="64dp"
+                    android:layout_width="match_parent"
                     android:layout_height="64dp"
-                    android:src="@drawable/turimo4"
+                    android:src="@drawable/centroturisticofoto"
                     android:padding="10dp"/>
 
                 <TextView
@@ -195,32 +186,24 @@
 
         </android.support.v7.widget.CardView>
 
-        <!--Tercera-->
-
-
-        <!--Cuarta-->
-        <!--Quinta-->
-        <!--sexta-->
 
     </LinearLayout>
 
     <LinearLayout
-
-        android:layout_width="350dp"
-        android:layout_height="140dp"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
         android:gravity="center"
-        android:clipToPadding="false"
+        android:layout_margin="10dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
         android:orientation="horizontal">
 
-
-        <!--primera-->
         <android.support.v7.widget.CardView
             android:layout_weight="1"
             android:layout_margin="10dp"
             android:id="@+id/quinto"
             android:layout_width="10dp"
-            android:layout_height="150dp"
-            app:cardCornerRadius="20dp">
+            android:layout_height="150dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -228,13 +211,12 @@
                 android:orientation="vertical"
                 android:gravity="center">
 
-                <ImageView
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:src="@drawable/tire_application_2924"
-                    android:padding="10dp"
-                   />
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:padding="10dp"
+                    android:src="@drawable/llanteran" />
 
                 <TextView
                     style="bold"
@@ -247,14 +229,13 @@
 
 
         </android.support.v7.widget.CardView>
-        <!--segunda-->
+
         <android.support.v7.widget.CardView
             android:layout_weight="1"
             android:layout_margin="10dp"
             android:id="@+id/sexto"
             android:layout_width="10dp"
-            android:layout_height="150dp"
-            app:cardCornerRadius="20dp">
+            android:layout_height="150dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -263,9 +244,9 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="64dp"
+                    android:layout_width="match_parent"
                     android:layout_height="64dp"
-                    android:src="@drawable/marker"
+                    android:src="@drawable/mg"
                     android:padding="10dp" />
 
 
@@ -285,11 +266,12 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="175dp"
-        android:layout_height="140dp"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_margin="4dp"
         android:gravity="center"
-        android:clipToPadding="false"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
         android:orientation="horizontal"
       >
 
@@ -298,14 +280,13 @@
             android:layout_margin="10dp"
             android:id="@+id/setimo"
             android:layout_width="10dp"
-            android:layout_height="150dp"
-            app:cardCornerRadius="20dp">
-            >
+            android:layout_height="150dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:layout_margin="10dp"
                 android:gravity="center">
 
                 <ImageView
@@ -315,7 +296,7 @@
                     android:padding="10dp" />
 
                 <TextView
-                    style="bold"
+                    android:textStyle="bold"
                     android:layout_marginTop="5dp"
                     android:text="@string/menu_home"
                     android:layout_width="wrap_content"
@@ -323,12 +304,366 @@
 
             </LinearLayout>
 
-
-
         </android.support.v7.widget.CardView>
 
 
     </LinearLayout>
 
+</LinearLayout>
 
+</LinearLayout-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/edificios"
+    android:weightSum="10"
+    tools:context=".PruebaMenu">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#a8000000">
+
+    <RelativeLayout
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/texto"
+            android:text="Menu Principal"
+            android:textSize="40sp"
+            android:textColor="#fff"
+            android:fontFamily="cursive"
+            android:layout_centerInParent="true"
+            />
+
+    </RelativeLayout>
+
+    <GridLayout
+        android:columnCount="2"
+        android:rowCount="3"
+        android:alignmentMode="alignMargins"
+        android:columnOrderPreserved="false"
+        android:layout_weight="8"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="14dp"
+        >
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/primero"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp"
+            >
+            <LinearLayout
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/tiendac"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="Pulperias"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/segundo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp"
+            >
+            <LinearLayout
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/sodap"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="Sodas"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/tercero"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp"
+            >
+            <LinearLayout
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/busamarillo"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="Parada de bus"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cuarto"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp"
+            >
+            <LinearLayout
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/centroturisticofoto"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="Centro turistico"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/quinto"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp"
+            >
+            <LinearLayout
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/llanteran"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="Llanteras"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/sexto"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp"
+            >
+            <LinearLayout
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/mg"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="Agregar Ubicación"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/setimo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp"
+            >
+            <LinearLayout
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/housep"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="Inicio"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/octavo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp"
+            >
+            <LinearLayout
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/off"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="Cerrar Sesión"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </GridLayout>
+
+    </LinearLayout>
 </LinearLayout>

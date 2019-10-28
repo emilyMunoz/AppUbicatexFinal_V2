@@ -16,6 +16,7 @@ public class PruebaMenu extends AppCompatActivity implements View.OnClickListene
     CardView cardSodas;
     CardView cardMarcador;
     CardView cardInicio;
+    CardView cardCerrar;
 
 
 
@@ -31,6 +32,7 @@ public class PruebaMenu extends AppCompatActivity implements View.OnClickListene
         cardLLantera = findViewById(R.id.quinto);
         cardMarcador = findViewById(R.id.sexto);
         cardInicio = findViewById(R.id.setimo);
+        cardCerrar = findViewById(R.id.octavo);
 
         cardPuperia.setOnClickListener(this);
         cardSodas.setOnClickListener(this);
@@ -39,9 +41,7 @@ public class PruebaMenu extends AppCompatActivity implements View.OnClickListene
         cardLLantera.setOnClickListener(this);
         cardMarcador.setOnClickListener(this);
         cardInicio.setOnClickListener(this);
-
-
-
+        cardCerrar.setOnClickListener(this);
     }
 
     @Override
@@ -83,7 +83,13 @@ public class PruebaMenu extends AppCompatActivity implements View.OnClickListene
                 startActivity(inten7);
                 break;
 
+            case R.id.octavo:
+                Intent inten8 = new Intent(PruebaMenu.this,InicioActivity.class);
+                startActivity(inten8);
+                break;
+
             }
+
         }
 }
 
