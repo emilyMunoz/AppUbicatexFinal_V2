@@ -1,7 +1,9 @@
 package com.example.appubicatexfinal;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -28,6 +30,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mapbox.android.core.location.LocationEngine;
+import com.mapbox.android.core.location.LocationEngineCallback;
+import com.mapbox.android.core.location.LocationEngineProvider;
+import com.mapbox.android.core.location.LocationEngineRequest;
+import com.mapbox.android.core.location.LocationEngineResult;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -43,6 +50,8 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -52,9 +61,16 @@ public class MainActivity extends AppCompatActivity
 
      private TextView lblUser;
 
-     private MapView mapView;
+    private static final long DEFAULT_INTERVAL_IN_MILLISECONDS = 1000L;
+    private static final long DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5;
+
+    private MapView mapView;
      private PermissionsManager permissionsManager;
      private MapboxMap mapboxMap;
+
+    private LocationEngine locationEngine;
+    private LocationChangeListeningActivityLocationCallback callback =
+            new LocationChangeListeningActivityLocationCallback(this);
 
     private DatabaseReference mDatabase;
 
@@ -123,31 +139,11 @@ public class MainActivity extends AppCompatActivity
                 enableLocationComponent(style);
             }
         });
-        mDatabase.child("Marcadores").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                    Marcador mk = snapshot.getValue(Marcador.class);
-                    double latitud = mk.getLatitud();
-                    double longitud = mk.getLongitud();
-                    String nombre = mk.getNombre();
-                    int codigo = mk.getCodigo();
-                    // int telefono = mk.getTelefono();
-                    mapboxMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(latitud, longitud))
-                            .title(nombre));
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
@@ -161,12 +157,15 @@ public class MainActivity extends AppCompatActivity
     public void onPermissionResult(boolean granted) {
         if (granted) {
             Toast.makeText(this,"Tu ubicacion", Toast.LENGTH_LONG).show();
-            mapboxMap.getStyle(new Style.OnStyleLoaded() {
+           /* mapboxMap.getStyle(new Style.OnStyleLoaded() {
                 @Override
                 public void onStyleLoaded(@NonNull Style style) {
                     enableLocationComponent(style);
                 }
-            });
+            });*/
+            if (mapboxMap.getStyle() != null) {
+                enableLocationComponent(mapboxMap.getStyle());
+            }
         } else {
             /*R.string.user_location_permission_not_granted*/
             Toast.makeText(this,"Se Rechazo" , Toast.LENGTH_LONG).show();
@@ -191,8 +190,14 @@ public class MainActivity extends AppCompatActivity
             // Get an instance of the component
             LocationComponent locationComponent = mapboxMap.getLocationComponent();
             // Activate with options
-            locationComponent.activateLocationComponent(
-                    LocationComponentActivationOptions.builder(this, loadedMapStyle).build());
+            LocationComponentActivationOptions locationComponentActivationOptions =
+                    LocationComponentActivationOptions
+                            .builder(this, loadedMapStyle)
+                            .useDefaultLocationEngine(false)
+                            .build();
+            // Activate with the LocationComponentActivationOptions object
+            locationComponent.activateLocationComponent(locationComponentActivationOptions);
+
             // Enable to make component visible
             locationComponent.setLocationComponentEnabled(true);
             // Set the component's camera mode
@@ -202,10 +207,26 @@ public class MainActivity extends AppCompatActivity
 
             locationComponent.zoomWhileTracking(15.0);
 
+            initLocationEngine();
         } else {
             permissionsManager = new PermissionsManager(this);
             permissionsManager.requestLocationPermissions(this);
         }
+    }
+
+    /**
+     * Set up the LocationEngine and the parameters for querying the device's location
+     */
+    @SuppressLint("MissingPermission")
+    private void initLocationEngine() {
+        locationEngine = LocationEngineProvider.getBestLocationEngine(this);
+
+        LocationEngineRequest request = new LocationEngineRequest.Builder(DEFAULT_INTERVAL_IN_MILLISECONDS)
+                .setPriority(LocationEngineRequest.PRIORITY_HIGH_ACCURACY)
+                .setMaxWaitTime(DEFAULT_MAX_WAIT_TIME).build();
+
+        locationEngine.requestLocationUpdates(request, callback, getMainLooper());
+        locationEngine.getLastLocation(callback);
     }
     //FIN DE CONFIGURACION DE UBICACION ACTUAL
 
@@ -236,6 +257,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (locationEngine != null) {
+            locationEngine.removeLocationUpdates(callback);
+        }
         mapView.onDestroy();
     }
 
@@ -275,6 +299,96 @@ public class MainActivity extends AppCompatActivity
              }
              return true;
         }
+
+    private static class LocationChangeListeningActivityLocationCallback
+            implements LocationEngineCallback<LocationEngineResult> {
+
+        private final WeakReference<MainActivity> activityWeakReference;
+
+        LocationChangeListeningActivityLocationCallback(MainActivity activity) {
+            this.activityWeakReference = new WeakReference<>(activity);
+        }
+
+        /**
+         * The LocationEngineCallback interface's method which fires when the device's location has changed.
+         *
+         * @param result the LocationEngineResult object which has the last known location within it.
+         */
+        @Override
+        public void onSuccess(final LocationEngineResult result) {
+            final MainActivity activity = activityWeakReference.get();
+
+            if (activity != null) {
+                Location location = result.getLastLocation();
+
+                if (location == null) {
+                    return;
+                }
+
+                activity.mDatabase.child("Marcadores").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            Marcador mk = snapshot.getValue(Marcador.class);
+                            double latitud = mk.getLatitud();
+                            double longitud = mk.getLongitud();
+                            String nombre = mk.getNombre();
+                            int codigo = mk.getCodigo();
+                            // int telefono = mk.getTelefono();
+
+                            double dist =  distFrom(latitud, longitud,
+                                    result.getLastLocation().getLatitude(),
+                                    result.getLastLocation().getLongitude());
+
+                            if (dist < 1000){
+                                activity.mapboxMap.addMarker(new MarkerOptions()
+                                        .position(new LatLng(latitud, longitud))
+                                        .title(nombre));
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+
+                if (activity.mapboxMap != null && result.getLastLocation() != null) {
+                    activity.mapboxMap.getLocationComponent().forceLocationUpdate(result.getLastLocation());
+                }
+            }
+        }/*Toast.makeText(activity, String.format("Distancia en metros:" + distancia),
+                            Toast.LENGTH_SHORT).show();*/
+
+        /**
+         * The LocationEngineCallback interface's method which fires when the device's location can't be captured
+         *
+         * @param exception the exception message
+         */
+        @Override
+        public void onFailure(@NonNull Exception exception) {
+            Log.d("LocationChangeActivity", exception.getLocalizedMessage());
+            MainActivity activity = activityWeakReference.get();
+            if (activity != null) {
+                Toast.makeText(activity, exception.getLocalizedMessage(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        public static double distFrom(double lat1, double lng1, double lat2, double lng2) {
+            double earthRadius = 6371000; //meters
+            double dLat = Math.toRadians(lat2-lat1);
+            double dLng = Math.toRadians(lng2-lng1);
+            double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                    Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                            Math.sin(dLng/2) * Math.sin(dLng/2);
+            double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            double dist = (double) (earthRadius * c);
+
+            return dist;
+        }
+    }
 
 
 }
