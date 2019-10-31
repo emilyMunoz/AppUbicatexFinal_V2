@@ -55,18 +55,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity
-        implements
+public class MainActivity extends AppCompatActivity implements
         OnMapReadyCallback, PermissionsListener {
-
-     private TextView lblUser;
 
     private static final long DEFAULT_INTERVAL_IN_MILLISECONDS = 1000L;
     private static final long DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5;
 
     private MapView mapView;
-     private PermissionsManager permissionsManager;
-     private MapboxMap mapboxMap;
+    private PermissionsManager permissionsManager;
+    private MapboxMap mapboxMap;
 
     private LocationEngine locationEngine;
     private LocationChangeListeningActivityLocationCallback callback =
@@ -91,26 +88,26 @@ public class MainActivity extends AppCompatActivity
         //NavigationView navigationView = findViewById(R.id.nav_view);
 
         //lblUser = navigationView.getHeaderView(0).findViewById(R.id.lblUser);
-       // lblUser.setText(getIntent().getExtras().getString("usuario"));
+        // lblUser.setText(getIntent().getExtras().getString("usuario"));
         setSupportActionBar(toolbar);
-       // DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        // DrawerLayout drawer = findViewById(R.id.drawer_layout);
         //ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-            //    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-      //  drawer.addDrawerListener(toggle);
-       // toggle.syncState();
+        //    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        //  drawer.addDrawerListener(toggle);
+        // toggle.syncState();
         //navigationView.setNavigationItemSelectedListener(this);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        FloatingActionButton fab2 = findViewById(R.id.fab2);
+        FloatingActionButton posicionActual = findViewById(R.id.fab);
+        FloatingActionButton menu = findViewById(R.id.fab2);
 
-        fab2.setOnClickListener(new View.OnClickListener() {
+        menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(MainActivity.this,PruebaMenu.class);
+                Intent in = new Intent(MainActivity.this, PruebaMenu.class);
                 startActivity(in);
             }
         });
-        fab.setOnClickListener(new View.OnClickListener() {
+        posicionActual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mapboxMap.getStyle(new Style.OnStyleLoaded() {
@@ -121,13 +118,7 @@ public class MainActivity extends AppCompatActivity
                 });
             }
         });
-    }
-
-
-    //boton flotante 2
-
-
-   //FIN DEL ONCREATE
+    }//FIN DEL ONCREATE
 
     //INICIO DE CONFIGURACION DE UBICACION ACTUAL
     @Override
@@ -150,13 +141,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onExplanationNeeded(List<String> permissionsToExplain) {
         /*R.string.user_location_permission_explanation*/
-        Toast.makeText(this,"Cambiar Toast ", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Cambiar Toast ", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onPermissionResult(boolean granted) {
         if (granted) {
-            Toast.makeText(this,"Tu ubicacion", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Tu ubicacion", Toast.LENGTH_LONG).show();
            /* mapboxMap.getStyle(new Style.OnStyleLoaded() {
                 @Override
                 public void onStyleLoaded(@NonNull Style style) {
@@ -168,7 +159,7 @@ public class MainActivity extends AppCompatActivity
             }
         } else {
             /*R.string.user_location_permission_not_granted*/
-            Toast.makeText(this,"Se Rechazo" , Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Se Rechazo", Toast.LENGTH_LONG).show();
 
             //cuando rechazo se cierra la aplicacon
             //finish();
@@ -176,17 +167,17 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    @SuppressWarnings( {"MissingPermission"})
+    @SuppressWarnings({"MissingPermission"})
     public void onStart() {
         super.onStart();
         mapView.onStart();
     }
 
-    @SuppressWarnings( {"MissingPermission"})
+    @SuppressWarnings({"MissingPermission"})
     private void enableLocationComponent(@NonNull Style loadedMapStyle) {
         // Check if permissions are enabled and if not request
         if (PermissionsManager.areLocationPermissionsGranted(this)) {
-            Toast.makeText(this,"Tu ubicacion", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Tu ubicacion", Toast.LENGTH_LONG).show();
             // Get an instance of the component
             LocationComponent locationComponent = mapboxMap.getLocationComponent();
             // Activate with options
@@ -270,11 +261,10 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater=getMenuInflater();
-        inflater.inflate(R.menu.main,menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -285,20 +275,20 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         Intent i;
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
 
             case R.id.action_cerrarsesion:
-                i = new Intent(this,PruebaMenu.class);
+                i = new Intent(this, PruebaMenu.class);
                 startActivity(i);
                 break;
 
             //case R.id.action_inicio:
-               // i = new Intent(this,InicioActivity.class);
-               // startActivity(i);
-               // break;
-             }
-             return true;
+            // i = new Intent(this,InicioActivity.class);
+            // startActivity(i);
+            // break;
         }
+        return true;
+    }
 
     private static class LocationChangeListeningActivityLocationCallback
             implements LocationEngineCallback<LocationEngineResult> {
@@ -337,11 +327,11 @@ public class MainActivity extends AppCompatActivity
                             int codigo = mk.getCodigo();
                             // int telefono = mk.getTelefono();
 
-                            double dist =  distFrom(latitud, longitud,
+                            double dist = distFrom(latitud, longitud,
                                     result.getLastLocation().getLatitude(),
                                     result.getLastLocation().getLongitude());
 
-                            if (dist < 1000){
+                            if (dist < 1000) {
                                 activity.mapboxMap.addMarker(new MarkerOptions()
                                         .position(new LatLng(latitud, longitud))
                                         .title(nombre));
@@ -378,17 +368,15 @@ public class MainActivity extends AppCompatActivity
 
         public static double distFrom(double lat1, double lng1, double lat2, double lng2) {
             double earthRadius = 6371000; //meters
-            double dLat = Math.toRadians(lat2-lat1);
-            double dLng = Math.toRadians(lng2-lng1);
-            double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            double dLat = Math.toRadians(lat2 - lat1);
+            double dLng = Math.toRadians(lng2 - lng1);
+            double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
                     Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
-                            Math.sin(dLng/2) * Math.sin(dLng/2);
-            double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+                            Math.sin(dLng / 2) * Math.sin(dLng / 2);
+            double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
             double dist = (double) (earthRadius * c);
 
             return dist;
         }
     }
-
-
 }
