@@ -50,7 +50,7 @@ public class Sodas extends AppCompatActivity implements OnMapReadyCallback, Perm
 
     private static final long DEFAULT_INTERVAL_IN_MILLISECONDS = 1000L;
     private static final long DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5;
-    private static final int CODIGO = 6;
+    private static final int CODIGO = 2;
 
     private MapView mapView;
     private PermissionsManager permissionsManager;
@@ -240,7 +240,7 @@ public class Sodas extends AppCompatActivity implements OnMapReadyCallback, Perm
                             double longitud = mk.getLongitud();
                             String nombre = mk.getNombre();
                             int codigo = mk.getCodigo();
-                            if (codigo == CODIGO) {
+                            if (codigo == activity.CODIGO) {
                                 double dist = distFrom(latitud, longitud,
                                         result.getLastLocation().getLatitude(),
                                         result.getLastLocation().getLongitude());

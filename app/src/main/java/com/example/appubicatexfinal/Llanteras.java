@@ -50,7 +50,7 @@ public class Llanteras extends AppCompatActivity implements OnMapReadyCallback, 
 
     private static final long DEFAULT_INTERVAL_IN_MILLISECONDS = 1000L;
     private static final long DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5;
-    private static final int CODIGO = 3;
+    private static final int CODIGO = 5;
 
     private MapView mapView;
     private PermissionsManager permissionsManager;
