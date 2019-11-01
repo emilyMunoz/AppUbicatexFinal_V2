@@ -1,126 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".formulario"
-    >
-
-
+    tools:context=".formulario">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp"
-        android:padding="16dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-
-        <TextView
-            android:paddingTop="50dp"
+        <com.mapbox.mapboxsdk.maps.MapView
+            android:id="@+id/mapView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Administrar marcadores"
-            android:textSize="15dp"
-            android:paddingLeft="100dp"
-            android:paddingRight="10dp"
-            android:textColor="#000"/>
+            android:layout_height="300dp"
+            mapbox:mapbox_cameraZoom="15" />
 
-
-
-        <EditText
-
-            android:id="@+id/lcodigo"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="24dp"
-            android:hint="Código"
-            android:paddingLeft="20dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:inputType="text"
-            android:textColorHint="#ccc"
-            android:background="@drawable/textedit_redondo_negro"
-            android:textColor="#000"
-            />
-
-
-
-    <EditText
-        android:id="@+id/latitud"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="15dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:hint="Latitud"
-        android:inputType="text"
-        android:textColorHint="#ccc"
-        android:background="@drawable/textedit_redondo_negro"
-        android:textColor="#000"/>
-
-        <EditText
-            android:id="@+id/longitud"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="24dp"
-            android:hint="Longitud"
-            android:paddingLeft="20dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:inputType="text"
-            android:textColorHint="#ccc"
-            android:background="@drawable/textedit_redondo_negro"
-            android:textColor="#000"
-            />
-
-        <EditText
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="15dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:hint="Nombre"
-
-            android:inputType="text"
-            android:textColorHint="#ccc"
-            android:background="@drawable/textedit_redondo_negro"
-            android:textColor="#000"/>
-
-    <Button
-        android:id="@+id/btn_guardar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Guardar"
-        android:textColor="#fff"
-        android:background="@drawable/boton_redondo"
-        />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/select_location_button"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:layout_margin="10dp"
-            android:gravity="center_horizontal"
-            android:text="Lista de marcadores">
+            android:layout_gravity="bottom"
+            android:layout_margin="8dp"
+            android:background="@color/colorPrimary"
+            android:text="Seleccionar un Punto"
+            android:textColor="@android:color/white" />
 
-        </TextView>
-
-        <ListView
-            android:id="@+id/lv_datosMarcadores"
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></ListView>
+            android:layout_height="match_parent">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="100dp"
+                    android:paddingRight="10dp"
+                    android:text="Administrar marcadores"
+                    android:textColor="#000"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/lcodigo"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/textedit_redondo_negro"
+                    android:hint="Código"
+                    android:inputType="text"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="#000"
+                    android:textColorHint="#ccc" />
+
+                <EditText
+                    android:id="@+id/latitud"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/textedit_redondo_negro"
+                    android:hint="Latitud"
+                    android:inputType="text"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="#000"
+                    android:textColorHint="#ccc" />
+
+                <EditText
+                    android:id="@+id/longitud"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/textedit_redondo_negro"
+                    android:hint="Longitud"
+                    android:inputType="text"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="#000"
+                    android:textColorHint="#ccc" />
+
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/textedit_redondo_negro"
+                    android:hint="Nombre"
+                    android:inputType="text"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="#000"
+                    android:textColorHint="#ccc" />
+
+                <Button
+                    android:id="@+id/btn_guardar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/boton_redondo"
+                    android:text="Guardar"
+                    android:textColor="#fff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="Lista de marcadores"
+                    android:textSize="15dp"></TextView>
+
+                <ListView
+                    android:id="@+id/lv_datosMarcadores"
+                    android:layout_width="match_parent"
+                    android:layout_height="5000dp"></ListView>
+
+            </LinearLayout>
+
+        </ScrollView>
 
     </LinearLayout>
 
@@ -130,7 +144,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/menu"/>
-
+        app:srcCompat="@drawable/menu" />
 
 </android.support.design.widget.CoordinatorLayout>
