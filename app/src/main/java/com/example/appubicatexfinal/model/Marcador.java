@@ -1,5 +1,10 @@
 package com.example.appubicatexfinal.model;
 
+import com.example.appubicatexfinal.MainActivity;
+import com.example.appubicatexfinal.R;
+import com.mapbox.mapboxsdk.annotations.Icon;
+import com.mapbox.mapboxsdk.annotations.IconFactory;
+
 public class Marcador {
 
         private int codigo ;
@@ -7,7 +12,6 @@ public class Marcador {
         //private int telefono;
         private double longitud;
         private double latitud;
-
 
         public Marcador() {
 

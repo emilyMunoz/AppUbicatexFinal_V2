@@ -8,14 +8,14 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="75dp"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <LinearLayout
+        <!--LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-        </LinearLayout>
+        </LinearLayout-->
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -23,7 +23,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorAccent"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/app_name"/>
+            app:title="@string/app_name" />
 
     </android.support.design.widget.AppBarLayout>
 

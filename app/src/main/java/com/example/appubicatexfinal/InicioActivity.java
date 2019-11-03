@@ -27,9 +27,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
     //private Button btnRegistrarse;
-
-
-
+  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +39,6 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         textEmail = findViewById(R.id.email);
         textPassword = findViewById(R.id.password);
         btnIngresar =  findViewById(R.id.btn_iniciarsesion);
-
         progressDialog = new ProgressDialog(this);
         btnIngresar.setOnClickListener(this);
         //btnRegistrarse.setOnClickListener(this);
@@ -79,6 +76,11 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
                     Intent inten = new Intent(InicioActivity.this,MainActivity.class);
                     inten.putExtra("usuario", textEmail.getText().toString());
                     startActivity(inten);
+
+                    /*Intent intent = new Intent(InicioActivity.this, MainActivity.class);
+                    intent.putExtra("MESSAGE",  textEmail.getText().toString());
+                    startActivity(intent);*/
+
                 }else {
                     if (task.getException()instanceof FirebaseAuthUserCollisionException){//si existe un correo igual
 
@@ -118,4 +120,11 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         iniciarSesion();
 
     }
+
+    /*public void sendMessage(View view) {
+        Intent intent = new Intent(this, PruebaMenu.class);
+        EditText editText = findViewById(R.id.email);
+        intent.putExtra("MESSAGE",  editText.getText().toString());
+        startActivity(intent);
+    }*/
 }

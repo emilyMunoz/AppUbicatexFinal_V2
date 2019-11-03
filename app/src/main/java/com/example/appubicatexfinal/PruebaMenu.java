@@ -17,7 +17,7 @@ public class PruebaMenu extends AppCompatActivity implements View.OnClickListene
     CardView cardMarcador;
     CardView cardInicio;
     CardView cardCerrar;
-
+    private String nombreusuario;
 
 
     @Override
@@ -42,7 +42,11 @@ public class PruebaMenu extends AppCompatActivity implements View.OnClickListene
         cardMarcador.setOnClickListener(this);
         cardInicio.setOnClickListener(this);
         cardCerrar.setOnClickListener(this);
+
+        nombreusuario = getIntent().getExtras().getString("usuario");
     }
+
+
 
     @Override
     public void onClick(View v) {
@@ -50,41 +54,49 @@ public class PruebaMenu extends AppCompatActivity implements View.OnClickListene
 
             case R.id.primero:
                 Intent inten1 = new Intent(PruebaMenu.this,comercios.class);
+                inten1.putExtra("usuario",nombreusuario);
                 startActivity(inten1);
                 break;
 
             case R.id.segundo:
                 Intent inten2 = new Intent(PruebaMenu.this,Sodas.class);
+                inten2.putExtra("usuario",nombreusuario);
                 startActivity(inten2);
                 break;
 
             case R.id.tercero:
                 Intent inten3 = new Intent(PruebaMenu.this,Paradas.class);
+                inten3.putExtra("usuario",nombreusuario);
                 startActivity(inten3);
                 break;
 
             case R.id.cuarto:
                 Intent inten4 = new Intent(PruebaMenu.this,Centros_turisticos.class);
+                inten4.putExtra("usuario",nombreusuario);
                 startActivity(inten4);
                 break;
 
             case R.id.quinto:
                 Intent inten5 = new Intent(PruebaMenu.this,Llanteras.class);
+                inten5.putExtra("usuario",nombreusuario);
                 startActivity(inten5);
                 break;
 
             case R.id.sexto:
                 Intent inten6 = new Intent(PruebaMenu.this,formulario.class);
+                inten6.putExtra("usuario",nombreusuario);
                 startActivity(inten6);
                 break;
 
             case R.id.setimo:
                 Intent inten7 = new Intent(PruebaMenu.this,MainActivity.class);
+                inten7.putExtra("usuario",nombreusuario);
                 startActivity(inten7);
                 break;
 
             case R.id.octavo:
                 Intent inten8 = new Intent(PruebaMenu.this,InicioActivity.class);
+                inten8.putExtra("usuario",nombreusuario);
                 startActivity(inten8);
                 break;
 

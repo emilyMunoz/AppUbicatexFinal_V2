@@ -3,12 +3,17 @@ package com.example.appubicatexfinal;
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.View;
@@ -21,6 +26,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +44,8 @@ import com.mapbox.android.core.location.LocationEngineResult;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.Icon;
+import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -70,9 +78,11 @@ public class MainActivity extends AppCompatActivity implements
             new LocationChangeListeningActivityLocationCallback(this);
 
     private DatabaseReference mDatabase;
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -85,17 +95,15 @@ public class MainActivity extends AppCompatActivity implements
         mapView.getMapAsync(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        //NavigationView navigationView = findViewById(R.id.nav_view);
-
-        //lblUser = navigationView.getHeaderView(0).findViewById(R.id.lblUser);
-        // lblUser.setText(getIntent().getExtras().getString("usuario"));
         setSupportActionBar(toolbar);
-        // DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        //ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-        //    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        //  drawer.addDrawerListener(toggle);
-        // toggle.syncState();
-        //navigationView.setNavigationItemSelectedListener(this);
+
+       /* Intent intent = getIntent();
+        String message = intent.getStringExtra("MESSAGE");
+        textView = findViewById(R.id.textView);
+        textView.setText(message);*/
+
+        textView = findViewById(R.id.textView);
+        textView.setText(getIntent().getExtras().getString("usuario"));
 
         FloatingActionButton posicionActual = findViewById(R.id.fab);
         FloatingActionButton menu = findViewById(R.id.fab2);
@@ -104,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(MainActivity.this, PruebaMenu.class);
+                in.putExtra("usuario",getIntent().getExtras().getString("usuario"));
                 startActivity(in);
             }
         });
@@ -148,21 +157,12 @@ public class MainActivity extends AppCompatActivity implements
     public void onPermissionResult(boolean granted) {
         if (granted) {
             Toast.makeText(this, "Tu ubicacion", Toast.LENGTH_LONG).show();
-           /* mapboxMap.getStyle(new Style.OnStyleLoaded() {
-                @Override
-                public void onStyleLoaded(@NonNull Style style) {
-                    enableLocationComponent(style);
-                }
-            });*/
+
             if (mapboxMap.getStyle() != null) {
                 enableLocationComponent(mapboxMap.getStyle());
             }
         } else {
-            /*R.string.user_location_permission_not_granted*/
             Toast.makeText(this, "Se Rechazo", Toast.LENGTH_LONG).show();
-
-            //cuando rechazo se cierra la aplicacon
-            //finish();
         }
     }
 
@@ -290,6 +290,7 @@ public class MainActivity extends AppCompatActivity implements
         return true;
     }
 
+
     private static class LocationChangeListeningActivityLocationCallback
             implements LocationEngineCallback<LocationEngineResult> {
 
@@ -304,6 +305,7 @@ public class MainActivity extends AppCompatActivity implements
          *
          * @param result the LocationEngineResult object which has the last known location within it.
          */
+
         @Override
         public void onSuccess(final LocationEngineResult result) {
             final MainActivity activity = activityWeakReference.get();
@@ -325,16 +327,16 @@ public class MainActivity extends AppCompatActivity implements
                             double longitud = mk.getLongitud();
                             String nombre = mk.getNombre();
                             int codigo = mk.getCodigo();
-                            // int telefono = mk.getTelefono();
 
                             double dist = distFrom(latitud, longitud,
                                     result.getLastLocation().getLatitude(),
                                     result.getLastLocation().getLongitude());
-
+////////////////////////////////////////////////////prueba cambiar marcador//////////////////////////////////////////////////////////////////
                             if (dist < 1000) {
-                                activity.mapboxMap.addMarker(new MarkerOptions()
-                                        .position(new LatLng(latitud, longitud))
-                                        .title(nombre));
+                                    activity.mapboxMap.addMarker(new MarkerOptions()
+                                            .position(new LatLng(latitud, longitud))
+                                            .title(nombre)
+                                    );
                             }
                         }
                     }
