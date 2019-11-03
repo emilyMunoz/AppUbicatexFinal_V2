@@ -61,7 +61,7 @@ public class Llanteras extends AppCompatActivity implements OnMapReadyCallback, 
             new Llanteras.LocationChangeListeningActivityLocationCallback(this);
 
     private DatabaseReference mDatabase;
-
+    private String nombreusuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +77,7 @@ public class Llanteras extends AppCompatActivity implements OnMapReadyCallback, 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        nombreusuario = getIntent().getExtras().getString("usuario");
         FloatingActionButton posicionActual = findViewById(R.id.fab);
         FloatingActionButton menu = findViewById(R.id.fab2);
 
@@ -85,6 +85,7 @@ public class Llanteras extends AppCompatActivity implements OnMapReadyCallback, 
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(Llanteras.this, PruebaMenu.class);
+                in.putExtra("usuario",nombreusuario);
                 startActivity(in);
             }
         });

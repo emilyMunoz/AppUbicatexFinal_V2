@@ -61,6 +61,7 @@ public class Paradas extends AppCompatActivity implements OnMapReadyCallback, Pe
             new Paradas.LocationChangeListeningActivityLocationCallback(this);
 
     private DatabaseReference mDatabase;
+    private String nombreusuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +78,7 @@ public class Paradas extends AppCompatActivity implements OnMapReadyCallback, Pe
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        nombreusuario = getIntent().getExtras().getString("usuario");
         FloatingActionButton posicionActual = findViewById(R.id.fab);
         FloatingActionButton menu = findViewById(R.id.fab2);
 
@@ -85,6 +86,7 @@ public class Paradas extends AppCompatActivity implements OnMapReadyCallback, Pe
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(Paradas.this, PruebaMenu.class);
+                in.putExtra("usuario",nombreusuario);
                 startActivity(in);
             }
         });

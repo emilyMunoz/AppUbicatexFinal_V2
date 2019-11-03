@@ -61,6 +61,7 @@ public class Sodas extends AppCompatActivity implements OnMapReadyCallback, Perm
             new Sodas.LocationChangeListeningActivityLocationCallback(this);
 
     private DatabaseReference mDatabase;
+    private String nombreusuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,11 +81,12 @@ public class Sodas extends AppCompatActivity implements OnMapReadyCallback, Perm
 
         FloatingActionButton posicionActual = findViewById(R.id.fab);
         FloatingActionButton menu = findViewById(R.id.fab2);
-
+        nombreusuario = getIntent().getExtras().getString("usuario");
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(Sodas.this, PruebaMenu.class);
+                in.putExtra("usuario",nombreusuario);
                 startActivity(in);
             }
         });

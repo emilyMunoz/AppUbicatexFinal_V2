@@ -62,7 +62,7 @@ public class Centros_turisticos extends AppCompatActivity
             new Centros_turisticos.LocationChangeListeningActivityLocationCallback(this);
 
     private DatabaseReference mDatabase;
-
+    private String nombreusuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +78,7 @@ public class Centros_turisticos extends AppCompatActivity
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        nombreusuario = getIntent().getExtras().getString("usuario");
         FloatingActionButton posicionActual = findViewById(R.id.fabCentrosTuristicos);
         FloatingActionButton menu = findViewById(R.id.fab2CentrosTuristicos);
 
@@ -86,6 +86,7 @@ public class Centros_turisticos extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(Centros_turisticos.this, PruebaMenu.class);
+                in.putExtra("usuario",nombreusuario);
                 startActivity(in);
             }
         });

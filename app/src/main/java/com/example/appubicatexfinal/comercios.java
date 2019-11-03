@@ -59,6 +59,7 @@ public class comercios extends AppCompatActivity
             new comercios.LocationChangeListeningActivityLocationCallback(this);
 
     private DatabaseReference mDatabase;
+    private String nombreusuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,8 @@ public class comercios extends AppCompatActivity
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
+        nombreusuario = getIntent().getExtras().getString("usuario");
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -83,6 +86,7 @@ public class comercios extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(comercios.this, PruebaMenu.class);
+                in.putExtra("usuario",nombreusuario);
                 startActivity(in);
             }
         });

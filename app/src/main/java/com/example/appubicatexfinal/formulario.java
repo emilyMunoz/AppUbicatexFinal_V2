@@ -73,7 +73,6 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
     Button btnGuardar;
     ListView lista_marcadores;
 
-
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
@@ -87,7 +86,7 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
     private PermissionsManager permissionsManager;
     private ImageView hoveringMarker;
     private Layer droppedMarkerLayer;
-
+    private String nombreusuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,13 +102,14 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
         textlongitud = findViewById(R.id.longitud);
         txtlatitud = findViewById(R.id.latitud);
         txtnombre = findViewById(R.id.name);
-
+        nombreusuario = getIntent().getExtras().getString("usuario");
         FloatingActionButton fabf = findViewById(R.id.fabformulario);
 
         fabf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(formulario.this,PruebaMenu.class);
+                in.putExtra("usuario",nombreusuario);
                 startActivity(in);
             }
         });
@@ -121,8 +121,6 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
 
       inicializarFirebase();
       listarDatos();
-
-
     }
 
     private void listarDatos() {
@@ -139,21 +137,14 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
 
                            marcadorArrayAdapter = new ArrayAdapter<Marcador>(formulario.this, android.R.layout.simple_list_item_1, lisMarcador);
                            lista_marcadores.setAdapter(marcadorArrayAdapter);
-
-
                        }
-
-
                }
                @Override
                public void onCancelled(DatabaseError databaseError) {
 
                }
            });
-
        }
-
-
 
     private void inicializarFirebase() {
         FirebaseApp.initializeApp(this);
@@ -181,14 +172,12 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
             txtnombre.setError("Requerido");
 
         }
-
     }
     private void limpiar(){
         textCodigo.setText("");
         textlongitud.setText("");
         txtlatitud.setText("");
         txtnombre.setText("");
-
     }
 
     @Override
@@ -197,8 +186,6 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
         double longitud =Double.parseDouble(textlongitud.getText().toString());
         double latitud = Double.parseDouble(txtlatitud.getText().toString());
         String nombre = txtnombre.getText().toString();
-
-
         validacion();
 
         Marcador m = new Marcador();
