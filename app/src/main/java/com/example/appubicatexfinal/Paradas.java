@@ -2,6 +2,7 @@ package com.example.appubicatexfinal;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -31,7 +32,12 @@ import com.mapbox.android.core.location.LocationEngineRequest;
 import com.mapbox.android.core.location.LocationEngineResult;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
+import com.mapbox.api.directions.v5.models.DirectionsResponse;
+import com.mapbox.api.directions.v5.models.DirectionsRoute;
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationComponent;
@@ -42,9 +48,23 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import com.mapbox.services.android.navigation.ui.v5.NavigationLauncher;
+import com.mapbox.services.android.navigation.ui.v5.NavigationLauncherOptions;
+import com.mapbox.services.android.navigation.ui.v5.route.NavigationMapRoute;
+import com.mapbox.services.android.navigation.v5.navigation.NavigationRoute;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 
 public class Paradas extends AppCompatActivity implements OnMapReadyCallback, PermissionsListener {
 
@@ -52,16 +72,24 @@ public class Paradas extends AppCompatActivity implements OnMapReadyCallback, Pe
     private static final long DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5;
     private static final int CODIGO = 3;
 
+    private static final String TAG = "DirectionsActivity";
+
     private MapView mapView;
     private PermissionsManager permissionsManager;
     private MapboxMap mapboxMap;
 
     private LocationEngine locationEngine;
+    private LocationComponent locationComponent;
+    private DirectionsRoute currentRoute;
+    private NavigationMapRoute navigationMapRoute;
+
     private Paradas.LocationChangeListeningActivityLocationCallback callback =
             new Paradas.LocationChangeListeningActivityLocationCallback(this);
 
     private DatabaseReference mDatabase;
     private String nombreusuario;
+    FloatingActionButton irMarcadorP;
+    private boolean existeRuta = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +109,7 @@ public class Paradas extends AppCompatActivity implements OnMapReadyCallback, Pe
         nombreusuario = getIntent().getExtras().getString("usuario");
         FloatingActionButton posicionActual = findViewById(R.id.fab);
         FloatingActionButton menu = findViewById(R.id.fab2);
+        irMarcadorP = findViewById(R.id.irMarcadorP);
 
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +130,50 @@ public class Paradas extends AppCompatActivity implements OnMapReadyCallback, Pe
                 });
             }
         });
+
+        irMarcadorP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(existeRuta){
+                    mapboxMap.getStyle(new Style.OnStyleLoaded() {
+                        @Override
+                        public void onStyleLoaded(@NonNull Style style) {
+                            boolean simulateRoute = false;
+
+                            NavigationLauncherOptions options = NavigationLauncherOptions.builder()
+                                    .directionsRoute(currentRoute)
+                                    .shouldSimulateRoute(simulateRoute)
+                                    .build();
+                            NavigationLauncher.startNavigation(Paradas.this, options);
+                        }
+                    });
+                } else {
+                    Toast.makeText(Paradas.this,
+                            "Seleccione un Marcador", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
     }//FIN DEL ONCREATE
+
+
+    private void addDestinationIconSymbolLayer(@NonNull Style loadedMapStyle) {
+        loadedMapStyle.addImage("destination-icon-id",
+                BitmapFactory.decodeResource(this.getResources(), R.drawable.mapbox_marker_icon_default));
+        GeoJsonSource geoJsonSource = new GeoJsonSource("destination-source-id");
+        loadedMapStyle.addSource(geoJsonSource);
+        SymbolLayer destinationSymbolLayer = new SymbolLayer("destination-symbol-layer-id", "destination-source-id");
+        destinationSymbolLayer.withProperties(
+
+                iconImage("destination-icon-id"),
+                iconAllowOverlap(true),
+                iconIgnorePlacement(true)
+
+        );
+
+        loadedMapStyle.addLayer(destinationSymbolLayer);
+
+    }
 
     //INICIO DE CONFIGURACION DE UBICACION ACTUAL
     @Override
@@ -113,6 +185,73 @@ public class Paradas extends AppCompatActivity implements OnMapReadyCallback, Pe
                 enableLocationComponent(style);
             }
         });
+
+        mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(@NonNull Marker marker) {
+                existeRuta = true;
+                Toast.makeText(Paradas.this,
+                        "Generando Ruta...", Toast.LENGTH_LONG).show();
+
+                Point destinationPoint = Point.fromLngLat(marker.getPosition().getLongitude(), marker.getPosition().getLatitude());
+                Point originPoint = Point.fromLngLat(locationComponent.getLastKnownLocation().getLongitude(),
+                        locationComponent.getLastKnownLocation().getLatitude());
+
+                GeoJsonSource source = mapboxMap.getStyle().getSourceAs("destination-source-id");
+                if (source != null) {
+
+                    source.setGeoJson(Feature.fromGeometry(destinationPoint));
+
+                }
+                getRoute(originPoint, destinationPoint);
+
+                return true;
+            }
+        });
+    }
+    private void getRoute(Point origin, Point destination) {
+
+        NavigationRoute.builder(this)
+                .accessToken(Mapbox.getAccessToken())
+                .origin(origin)
+                .destination(destination)
+                .build()
+                .getRoute(new Callback<DirectionsResponse>() {
+                    @Override
+                    public void onResponse(Call<DirectionsResponse> call, Response<DirectionsResponse> response) {
+                        Log.d(TAG, "Response code: " + response.code());
+                        if (response.body() == null) {
+
+                            Log.e(TAG, "No routes found, make sure you set the right user and access token.");
+                            return;
+
+                        } else if (response.body().routes().size() < 1) {
+                            Log.e(TAG, "No routes found");
+
+                            return;
+
+                        }
+                        currentRoute = response.body().routes().get(0);
+// Draw the route on the map
+
+                        if (navigationMapRoute != null) {
+                            navigationMapRoute.removeRoute();
+                        } else {
+                            navigationMapRoute = new NavigationMapRoute(null, mapView, mapboxMap, R.style.NavigationMapRoute);
+
+                        }
+                        navigationMapRoute.addRoute(currentRoute);
+
+                    }
+
+                    @Override
+
+                    public void onFailure(Call<DirectionsResponse> call, Throwable throwable) {
+                        Log.e(TAG, "Error: " + throwable.getMessage());
+                    }
+
+                });
+
     }
 
     @Override
@@ -151,7 +290,7 @@ public class Paradas extends AppCompatActivity implements OnMapReadyCallback, Pe
         if (PermissionsManager.areLocationPermissionsGranted(this)) {
             Toast.makeText(this, "Tu ubicacion", Toast.LENGTH_LONG).show();
             // Get an instance of the component
-            LocationComponent locationComponent = mapboxMap.getLocationComponent();
+            locationComponent = mapboxMap.getLocationComponent();
             // Activate with options
             LocationComponentActivationOptions locationComponentActivationOptions =
                     LocationComponentActivationOptions
