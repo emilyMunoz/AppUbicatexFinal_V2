@@ -419,7 +419,7 @@ public class MainActivity extends AppCompatActivity implements
         switch (item.getItemId()) {
 
             case R.id.action_cerrarsesion:
-                i = new Intent(this, PruebaMenu.class);
+                i = new Intent(this, InicioActivity.class);
                 startActivity(i);
                 break;
 
