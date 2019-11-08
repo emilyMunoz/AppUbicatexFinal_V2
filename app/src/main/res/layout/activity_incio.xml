@@ -71,6 +71,8 @@
             android:fontFamily="cursive"
             android:textColor="#fff"/>
 
+
+
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"

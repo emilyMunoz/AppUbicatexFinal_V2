@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 
 public class RegistrarseActivity extends AppCompatActivity implements View.OnClickListener {
+    //private EditText textUsuario;
     private EditText textEmail;
     private EditText textPassword;
     private Button btnRegistrar;
@@ -35,6 +36,7 @@ public class RegistrarseActivity extends AppCompatActivity implements View.OnCli
         setSupportActionBar(toolbar);
 
         firebaseAuth = FirebaseAuth.getInstance();
+       // textUsuario =(EditText) findViewById(R.id.usuarioR);
         textEmail =(EditText) findViewById(R.id.email);
         textPassword = (EditText)findViewById(R.id.password);
         btnRegistrar = (Button) findViewById(R.id.btn_registrar);
@@ -43,8 +45,10 @@ public class RegistrarseActivity extends AppCompatActivity implements View.OnCli
 
     }
     private  void registrarUsuario(){
+       // String usuario = textUsuario.getText().toString().trim();
         String email = textEmail.getText().toString().trim();
         String password = textPassword.getText().toString().trim();
+
 
         if (TextUtils.isEmpty(email)){
             validacion();
@@ -86,7 +90,7 @@ public class RegistrarseActivity extends AppCompatActivity implements View.OnCli
         });
     }
     private void validacion(){
-
+        //String usuario = textUsuario.getText().toString();
         String correos = textEmail.getText().toString();
         String password = textPassword.getText().toString();
 
@@ -95,12 +99,14 @@ public class RegistrarseActivity extends AppCompatActivity implements View.OnCli
 
         } else if (password.equals("")){
             textPassword.setError("Requerido");
+
         }
 
     }
     private void limpiar(){
         textEmail.setText("");
         textPassword.setText("");
+       // textUsuario.setText("");
     }
 
     @Override

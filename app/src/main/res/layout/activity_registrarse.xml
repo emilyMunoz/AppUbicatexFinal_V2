@@ -70,6 +70,7 @@
             android:fontFamily="cursive"
             android:textColor="#fff"/>
 
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"

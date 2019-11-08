@@ -1,11 +1,17 @@
 package com.example.appubicatexfinal;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.services.android.navigation.ui.v5.NavigationLauncher;
+import com.mapbox.services.android.navigation.ui.v5.NavigationLauncherOptions;
 
 public class PruebaMenu extends AppCompatActivity implements View.OnClickListener{
 
@@ -82,11 +88,21 @@ public class PruebaMenu extends AppCompatActivity implements View.OnClickListene
                 startActivity(inten5);
                 break;
 
-            case R.id.sexto:
+              case R.id.sexto:
+            if (nombreusuario.equals("teampv2018@gmail.com") ){
+
                 Intent inten6 = new Intent(PruebaMenu.this,formulario.class);
                 inten6.putExtra("usuario",nombreusuario);
                 startActivity(inten6);
                 break;
+
+            }else {
+                Toast.makeText(PruebaMenu.this,
+                      "No puedes ingresar a este modulo lo sentimos !", Toast.LENGTH_LONG).show();
+
+
+            }
+
 
             case R.id.setimo:
                 Intent inten7 = new Intent(PruebaMenu.this,MainActivity.class);

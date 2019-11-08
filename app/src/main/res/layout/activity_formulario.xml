@@ -24,36 +24,28 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_margin="8dp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/boton_redondo_celeste"
             android:text="Seleccionar un Punto"
             android:textColor="@android:color/white" />
 
-        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="0dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="100dp"
-                    android:paddingRight="10dp"
-                    android:text="Administrar marcadores"
-                    android:textColor="#000"
-                    android:textSize="15dp" />
 
                 <EditText
                     android:id="@+id/lcodigo"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="0dp"
                     android:background="@drawable/textedit_redondo_negro"
                     android:hint="Código"
                     android:inputType="text"
@@ -83,7 +75,7 @@
                     android:id="@+id/longitud"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="15dp"
                     android:background="@drawable/textedit_redondo_negro"
                     android:hint="Longitud"
                     android:inputType="text"
@@ -114,7 +106,7 @@
                     android:id="@+id/btn_guardar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="15dp"
                     android:background="@drawable/boton_redondo"
                     android:text="Guardar"
                     android:textColor="#fff" />
@@ -125,7 +117,9 @@
                     android:layout_margin="10dp"
                     android:gravity="center_horizontal"
                     android:text="Lista de marcadores"
-                    android:textSize="15dp"></TextView>
+                    android:textSize="10dp">
+
+                </TextView>
 
                 <ListView
                     android:id="@+id/lv_datosMarcadores"
@@ -137,6 +131,19 @@
         </ScrollView>
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:orientation="vertical">
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/eliminar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/trash_can_38501"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabformulario"
@@ -145,5 +152,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/menu" />
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -17,6 +17,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -75,6 +76,7 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    Marcador marcadorSelected;
 
     private ArrayList<Marcador>  lisMarcador = new ArrayList<Marcador>();
     ArrayAdapter<Marcador>marcadorArrayAdapter;
@@ -104,6 +106,7 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
         txtnombre = findViewById(R.id.name);
         nombreusuario = getIntent().getExtras().getString("usuario");
         FloatingActionButton fabf = findViewById(R.id.fabformulario);
+        FloatingActionButton fabeliminar = findViewById(R.id.eliminar);
 
         fabf.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +117,16 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
             }
         });
 
+        fabeliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Marcador m = new Marcador();
+                m.setNombre(marcadorSelected.getNombre());
+                databaseReference.child("Marcadores").child(m.getNombre()).removeValue();
+                Toast.makeText(formulario.this, "Eliminado exitosamente", Toast.LENGTH_SHORT).show();
+                limpiar();
+            }
+        });
        // spiner = findViewById(R.id.categoria);
         btnGuardar =  findViewById(R.id.btn_guardar);
         btnGuardar.setOnClickListener(this);
@@ -121,6 +134,14 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
 
       inicializarFirebase();
       listarDatos();
+
+      lista_marcadores.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+          @Override
+          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+              marcadorSelected = (Marcador) parent.getItemAtPosition(position);
+
+          }
+      });
     }
 
     private void listarDatos() {
@@ -249,6 +270,8 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
                             selectLocationButton.setText("Seleccionar otro Punto");
 
 
+
+
 // Show the SymbolLayer icon to represent the selected map location
                             if (style.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
                                 GeoJsonSource source = style.getSourceAs("dropped-marker-source-id");
@@ -272,7 +295,7 @@ public class formulario extends AppCompatActivity implements View.OnClickListene
 // Switch the button appearance back to select a location.
                             selectLocationButton.setBackgroundColor(
                                     ContextCompat.getColor(formulario.this,
-                                            R.color.colorAccent));
+                                            R.color.PRUEBA));
                             selectLocationButton.setText("Seleccionar un Punto");
 
 // Show the red hovering ImageView marker
